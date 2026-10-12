@@ -1,0 +1,21 @@
+{
+  "source": "work/submission-local current source",
+  "files": [
+    {
+      "name": "启动本地演示.exe",
+      "bytes": 40469741,
+      "sha256": "f36e9ce01d86e47d1dee932661973bc8e525397b988eadc53fdb6e3d0d74ead3"
+    },
+    {
+      "name": "机巧江湖_本地演示.apk",
+      "bytes": 146598739,
+      "sha256": "99f9f4e24266ba5c568abbac9693e7bf3cea940a887f17fd790acd722475ba66"
+    },
+    {
+      "name": "离线运行说明.md",
+      "bytes": 1987,
+      "sha256": "6dc9f719e283cedca09b9f558a6cb79a5e1c77a2a36441d602f2b460a65de2c4"
+    }
+  ],
+  "notice": "Built with development Android signing. No production signing keys or online model credentials."
+}

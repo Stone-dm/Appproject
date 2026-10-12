@@ -1,0 +1,16 @@
+{
+  "debug_fresh_execution": {
+    "report_files": 10,
+    "tests": 50,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "offline": {
+    "report_files": 10,
+    "tests": 50,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  }
+}

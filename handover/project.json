@@ -1,0 +1,148 @@
+{
+  "schema_version": 1,
+  "project": "机巧江湖",
+  "handover_date": "2026-10-11",
+  "path_base": "Git repository root (Appproject); ../ paths require the separate full handover workspace",
+  "language": "zh-CN",
+  "authoritative_entrypoints": [
+    "README.md",
+    "handover/README.md",
+    "docs/handover/项目交接文档.md",
+    "CONTRIBUTING.md"
+  ],
+  "source_snapshot": {
+    "basis_commit": "b5d2c8c13df325acedeea3e16549f1b0f1449633",
+    "git_history_included": "Git clones follow remote history; the separately delivered ZIP excludes .git",
+    "note": "The basis commit describes the 2026-10-11 ZIP snapshot; inspect Git HEAD for the current version."
+  },
+  "architecture": {
+    "client": {
+      "path": "android",
+      "technology": "Kotlin + Jetpack Compose",
+      "gradle_modules": [
+        ":app"
+      ],
+      "production_kotlin_files": 151,
+      "ui_directory_count": 82,
+      "dependency_assembly": "app/src/main/java/com/jueqiao/jianghu/JianghuApp.kt"
+    },
+    "backend": {
+      "path": "services/api",
+      "technology": "Python + FastAPI + SQLAlchemy",
+      "deployment_style": "modular monolith with separate worker process",
+      "entry": "app/main.py",
+      "worker": "app/domains/media/worker.py",
+      "python_modules": 98,
+      "domains": [
+        "catalog",
+        "conference",
+        "creations",
+        "distribution",
+        "learning",
+        "luggage",
+        "media",
+        "mistakes",
+        "moderation",
+        "privacy",
+        "profiles"
+      ],
+      "migrations": 26,
+      "migration_head": "0026_video_media"
+    },
+    "infrastructure": {
+      "path": "infra/docker-compose.yml",
+      "services": [
+        "api",
+        "worker",
+        "postgres",
+        "redis",
+        "minio",
+        "clamav"
+      ]
+    },
+    "contracts": {
+      "path": "packages/learning-contracts",
+      "purpose": "TypeScript interface types and client; not a web app"
+    },
+    "offline": {
+      "path": "../work/submission-local",
+      "backend_entry": "backend/offline_server.py",
+      "android_entry": "android/app/src/main/java/com/jueqiao/jianghu/OfflineSetupActivity.kt",
+      "data": "SQLite + local media",
+      "online_ai": false,
+      "duplicates_required_by_current_build": true,
+      "included_in_git": false
+    }
+  },
+  "reproduction_target": {
+    "os": "Windows x64",
+    "python": "3.13",
+    "gradle_jdk": "21",
+    "android_sdk": 35,
+    "minimum_android_api": 24
+  },
+  "commands_from_root": {
+    "inspect": "py -3.13 handover/manage.py doctor",
+    "setup": "py -3.13 handover/manage.py setup --online",
+    "test_backend": "py -3.13 handover/manage.py test",
+    "offline_source": "py -3.13 handover/manage.py run-offline --port 8011",
+    "build_android": "py -3.13 handover/manage.py build-android --variant debug --java-home PATH_TO_JDK21",
+    "build_offline": "py -3.13 handover/build_offline.py --java-home PATH_TO_JDK21 --output NEW_OUTPUT_DIRECTORY",
+    "verify_complete_zip": "Run py -3.13 handover/manage.py verify-package from the complete ZIP workspace, not this Git root"
+  },
+  "config_templates": [
+    "services/api/.env.example",
+    "android/local.properties.example"
+  ],
+  "private_machine_files_not_shipped": [
+    ".env",
+    "local.properties",
+    "signing private keys",
+    "Git objects",
+    "virtual environments"
+  ],
+  "tests": {
+    "backend_files": 22,
+    "backend_cases_at_handover": 130,
+    "android_files": 10,
+    "android_test_methods_at_handover": 50,
+    "fresh_verification": "handover/verification.json"
+  },
+  "design_materials": [
+    "../文档",
+    "../设计稿",
+    "../人设图",
+    "../icon"
+  ],
+  "do_not_delete_by_name": [
+    "formal tests",
+    "migration history",
+    "API fixtures",
+    "Gradle Wrapper",
+    "application resources",
+    "offline source duplicates",
+    "unique design originals"
+  ],
+  "known_limits": [
+    "Client LuggageRepository/API spans several domains",
+    "Large creation state and navigation files",
+    "Offline source requires explicit synchronization",
+    "Legacy competition scripts contain old absolute paths",
+    "50 content entries do not imply all pages are fully accepted",
+    "Production operations and external model credentials are not automatically transferred"
+  ],
+  "ai_rules": [
+    "Inspect current code before editing",
+    "Preserve local modifications and secrets",
+    "Follow existing CONTRIBUTING UI conventions",
+    "Do not rerun patch_android.py on the already patched offline tree",
+    "Do not treat historical acceptance as current evidence",
+    "Report actual commands and unverified scope",
+    "Do not commit/push/publish or reset data without task authorization"
+  ],
+  "git_onboarding_updated": "2026-10-12",
+  "separate_deliverables": [
+    "full handover ZIP including offline source, wheels and design originals",
+    "restricted historical database backup"
+  ]
+}

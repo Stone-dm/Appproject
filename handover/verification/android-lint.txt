@@ -1,0 +1,357 @@
+<HANDOVER_ROOT>\Appproject\android\app\build.gradle.kts:27: Warning: Not targeting the latest versions of Android; compatibility modes apply. Consider testing and updating this version. Consult the android.os.Build.VERSION_CODES javadoc for details. [OldTargetApi]
+        targetSdk     = 35
+        ~~~~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "OldTargetApi":
+   When your application runs on a version of Android that is more recent than
+   your targetSdkVersion specifies that it has been tested with, various
+   compatibility modes kick in. This ensures that your application continues
+   to work, but it may look out of place. For example, if the targetSdkVersion
+   is less than 14, your app may get an option button in the UI.
+
+   To fix this issue, set the targetSdkVersion to the highest available value.
+   Then test your app to make sure everything works correctly. You may want to
+   consult the compatibility notes to see what changes apply to each version
+   you are adding support for:
+   https://developer.android.com/reference/android/os/Build.VERSION_CODES.html
+   as well as follow this guide:
+   https://developer.android.com/distribute/best-practices/develop/target-sdk.
+   html
+
+   https://developer.android.com/distribute/best-practices/develop/target-sdk.html
+
+<HANDOVER_ROOT>\Appproject\android\app\src\main\java\com\jueqiao\jianghu\ui\screens\dahui\ConferenceArenaDesign.kt:1868: Warning: Invalid Color hex value [InvalidColorHexValue from androidx.compose.ui.graphics]
+        color = if (selected) Color(0xFFF08FB791) else Color(0xEBC7DAB7),
+                                    ~~~~~~~~~~~~
+
+   Explanation for issues of type "InvalidColorHexValue":
+   Creating a Color with a hex value requires a 32 bit value (such as
+   0xFF000000), with 8 bits being used per channel (ARGB). Not passing a full
+   32 bit value will result in channels being undefined / incorrect.
+
+   Vendor: Jetpack Compose
+   Identifier: androidx.compose.ui.graphics
+   Feedback: https://issuetracker.google.com/issues/new?component=612128
+
+<HANDOVER_ROOT>\Appproject\android\app\src\main\java\com\jueqiao\jianghu\ui\components\AuthForm.kt:138: Warning: Modifier parameter should be the first optional parameter [ModifierParameter from androidx.compose.ui]
+    modifier: Modifier = Modifier,
+    ~~~~~~~~
+<HANDOVER_ROOT>\Appproject\android\app\src\main\java\com\jueqiao\jianghu\ui\components\HomeQuickActions.kt:84: Warning: Modifier parameter should be the first optional parameter [ModifierParameter from androidx.compose.ui]
+    modifier: Modifier = Modifier,
+    ~~~~~~~~
+
+   Explanation for issues of type "ModifierParameter":
+   The first (or only) Modifier parameter in a Composable function should
+   follow the following rules:
+   - Be named modifier
+   - Have a type of Modifier
+   - Either have no default value, or have a default value of Modifier
+   - If optional, be the first optional parameter in the parameter list
+
+   Vendor: Jetpack Compose
+   Identifier: androidx.compose.ui
+   Feedback: https://issuetracker.google.com/issues/new?component=612128
+
+<HANDOVER_ROOT>\Appproject\android\app\src\main\java\com\jueqiao\jianghu\ui\screens\picture\CreationEditorScreen.kt:130: Information: Prefer mutableIntStateOf instead of mutableStateOf [AutoboxingStateCreation from androidx.compose.runtime]
+    var exportScale by remember { mutableStateOf(1) }
+                                  ~~~~~~~~~~~~~~
+<HANDOVER_ROOT>\Appproject\android\app\src\main\java\com\jueqiao\jianghu\ui\screens\home\HomeScreen.kt:68: Information: Prefer mutableIntStateOf instead of mutableStateOf [AutoboxingStateCreation from androidx.compose.runtime]
+    var chatStep by remember { mutableStateOf(0) }
+                               ~~~~~~~~~~~~~~
+<HANDOVER_ROOT>\Appproject\android\app\src\main\java\com\jueqiao\jianghu\ui\screens\settings\SettingsDetailScreen.kt:667: Information: Prefer mutableFloatStateOf instead of mutableStateOf [AutoboxingStateCreation from androidx.compose.runtime]
+    var sliderValue by remember(key) { mutableStateOf(value) }
+                                       ~~~~~~~~~~~~~~
+
+   Explanation for issues of type "AutoboxingStateCreation":
+   Calling mutableStateOf<T>() when T is either backed by a primitive type on
+   the JVM or is a value class results in a state implementation that requires
+   all state values to be boxed. This usually causes an additional allocation
+   for each state write, and adds some additional work to auto-unbox values
+   when reading the value of the state. Instead, prefer to use a specialized
+   primitive state implementation for Int, Long, Float, and Double when the
+   state does not need to track null values and does not override the default
+   SnapshotMutationPolicy. See mutableIntStateOf(), mutableLongStateOf(),
+   mutableFloatStateOf(), and mutableDoubleStateOf() for more information.
+
+   Vendor: Jetpack Compose
+   Identifier: androidx.compose.runtime
+   Feedback: https://issuetracker.google.com/issues/new?component=612128
+
+<HANDOVER_ROOT>\Appproject\android\app\src\main\java\com\jueqiao\jianghu\ui\screens\login\LoginScreen.kt:117: Warning: State backed values should use the lambda overload of Modifier.offset [UseOfNonLambdaOffsetOverload from androidx.compose.foundation]
+                        .offset(y = contentOffsetY)
+                         ~~~~~~
+
+   Explanation for issues of type "UseOfNonLambdaOffsetOverload":
+   Modifier.offset() is recommended to be used with static arguments only to
+   avoid unnecessary recompositions. Modifier.offset{ } is preferred in the
+   cases where the arguments are backed by a State.
+
+   Vendor: Jetpack Compose
+   Identifier: androidx.compose.foundation
+   Feedback: https://issuetracker.google.com/issues/new?component=612128
+
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\mipmap-hdpi\ic_launcher.png: Warning: Launcher icons should not fill every pixel of their square region; see the design guide for details [IconLauncherShape]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\mipmap-mdpi\ic_launcher.png: Warning: Launcher icons should not fill every pixel of their square region; see the design guide for details [IconLauncherShape]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\mipmap-xhdpi\ic_launcher.png: Warning: Launcher icons should not fill every pixel of their square region; see the design guide for details [IconLauncherShape]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\mipmap-xxhdpi\ic_launcher.png: Warning: Launcher icons should not fill every pixel of their square region; see the design guide for details [IconLauncherShape]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\mipmap-xxxhdpi\ic_launcher.png: Warning: Launcher icons should not fill every pixel of their square region; see the design guide for details [IconLauncherShape]
+
+   Explanation for issues of type "IconLauncherShape":
+   According to the Android Design Guide
+   (https://d.android.com/r/studio-ui/designer/material/iconography) your
+   launcher icons should "use a distinct silhouette", a "three-dimensional,
+   front view, with a slight perspective as if viewed from above, so that
+   users perceive some depth."
+
+   The unique silhouette implies that your launcher icon should not be a
+   filled square.
+
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\group_177.png: Warning: The group_177.png icon has identical contents in the following configuration folders: drawable-nodpi, drawable [IconDuplicatesConfig]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\ic_dahui_return.png: Warning: The ic_dahui_return.png icon has identical contents in the following configuration folders: drawable-nodpi, drawable [IconDuplicatesConfig]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_yanwuchang_bg.png: Warning: The img_yanwuchang_bg.png icon has identical contents in the following configuration folders: drawable-nodpi, drawable [IconDuplicatesConfig]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_yanwuchang_panda.png: Warning: The img_yanwuchang_panda.png icon has identical contents in the following configuration folders: drawable-nodpi, drawable [IconDuplicatesConfig]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_yanwuchang_un50.png: Warning: The img_yanwuchang_un50.png icon has identical contents in the following configuration folders: drawable-nodpi, drawable [IconDuplicatesConfig]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_yanwuchang_un50_1.png: Warning: The img_yanwuchang_un50_1.png icon has identical contents in the following configuration folders: drawable-nodpi, drawable [IconDuplicatesConfig]
+
+   Explanation for issues of type "IconDuplicatesConfig":
+   If an icon is provided under different configuration parameters such as
+   drawable-hdpi or -v11, they should typically be different. This detector
+   catches cases where the same icon is provided in different configuration
+   folder which is usually not intentional.
+
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\ellipse_30.png: Warning: Found bitmap drawable res/drawable/ellipse_30.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\group_177.png: Warning: Found bitmap drawable res/drawable/group_177.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\ic_dahui_return.png: Warning: Found bitmap drawable res/drawable/ic_dahui_return.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\ic_launcher_background.png: Warning: Found bitmap drawable res/drawable/ic_launcher_background.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\ic_launcher_monochrome.png: Warning: Found bitmap drawable res/drawable/ic_launcher_monochrome.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_auth_bg.png: Warning: Found bitmap drawable res/drawable/img_auth_bg.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_auth_mascot.png: Warning: Found bitmap drawable res/drawable/img_auth_mascot.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_auth_panda_face.png: Warning: Found bitmap drawable res/drawable/img_auth_panda_face.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_avatar.png: Warning: Found bitmap drawable res/drawable/img_avatar.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_avatar_ring.png: Warning: Found bitmap drawable res/drawable/img_avatar_ring.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_book_1.png: Warning: Found bitmap drawable res/drawable/img_book_1.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_book_2.png: Warning: Found bitmap drawable res/drawable/img_book_2.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_book_3.png: Warning: Found bitmap drawable res/drawable/img_book_3.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_card_frame_bg.png: Warning: Found bitmap drawable res/drawable/img_card_frame_bg.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_chevron_right.png: Warning: Found bitmap drawable res/drawable/img_chevron_right.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_chuangzuodangan3_bg.png: Warning: Found bitmap drawable res/drawable/img_chuangzuodangan3_bg.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_chuangzuodangan5_bg.png: Warning: Found bitmap drawable res/drawable/img_chuangzuodangan5_bg.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_chuangzuodangan6_bg.png: Warning: Found bitmap drawable res/drawable/img_chuangzuodangan6_bg.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_chuangzuodangan6_image54.png: Warning: Found bitmap drawable res/drawable/img_chuangzuodangan6_image54.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_chuangzuodangan6_image57.png: Warning: Found bitmap drawable res/drawable/img_chuangzuodangan6_image57.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_chuangzuodangan6_rect24.png: Warning: Found bitmap drawable res/drawable/img_chuangzuodangan6_rect24.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_chuangzuodangan_bg.png: Warning: Found bitmap drawable res/drawable/img_chuangzuodangan_bg.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_corner_decor.png: Warning: Found bitmap drawable res/drawable/img_corner_decor.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_dahui_bg.png: Warning: Found bitmap drawable res/drawable/img_dahui_bg.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_dahui_group127.png: Warning: Found bitmap drawable res/drawable/img_dahui_group127.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_dahui_o.png: Warning: Found bitmap drawable res/drawable/img_dahui_o.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_forgot_bg.png: Warning: Found bitmap drawable res/drawable/img_forgot_bg.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_forgot_mascot.png: Warning: Found bitmap drawable res/drawable/img_forgot_mascot.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_gongfang_23.png: Warning: Found bitmap drawable res/drawable/img_gongfang_23.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_gongfang_24.png: Warning: Found bitmap drawable res/drawable/img_gongfang_24.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_gongfang_bg.png: Warning: Found bitmap drawable res/drawable/img_gongfang_bg.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_gongfang_panda.png: Warning: Found bitmap drawable res/drawable/img_gongfang_panda.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_gongfang_return.png: Warning: Found bitmap drawable res/drawable/img_gongfang_return.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_gunlun10_untitled_232.png: Warning: Found bitmap drawable res/drawable/img_gunlun10_untitled_232.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_gunlun10_untitled_2_24.png: Warning: Found bitmap drawable res/drawable/img_gunlun10_untitled_2_24.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_gunlun10_untitled_2_26.png: Warning: Found bitmap drawable res/drawable/img_gunlun10_untitled_2_26.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_gunlun10_untitled_2_28.png: Warning: Found bitmap drawable res/drawable/img_gunlun10_untitled_2_28.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_gunlun10_untitled_2_30.png: Warning: Found bitmap drawable res/drawable/img_gunlun10_untitled_2_30.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_gunlun10_untitled_2_31.png: Warning: Found bitmap drawable res/drawable/img_gunlun10_untitled_2_31.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_gunlun10_untitled_2_32.png: Warning: Found bitmap drawable res/drawable/img_gunlun10_untitled_2_32.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_gunlun10_untitled_2_33.png: Warning: Found bitmap drawable res/drawable/img_gunlun10_untitled_2_33.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_gunlun10_untitled_2_recovered_1.png: Warning: Found bitmap drawable res/drawable/img_gunlun10_untitled_2_recovered_1.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_gunlun10_untitled_2_recovered_16.png: Warning: Found bitmap drawable res/drawable/img_gunlun10_untitled_2_recovered_16.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_gunlun11_untitled_241.png: Warning: Found bitmap drawable res/drawable/img_gunlun11_untitled_241.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_gunlun11_untitled_2_2.png: Warning: Found bitmap drawable res/drawable/img_gunlun11_untitled_2_2.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_gunlun11_untitled_2_24.png: Warning: Found bitmap drawable res/drawable/img_gunlun11_untitled_2_24.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_gunlun11_untitled_2_30.png: Warning: Found bitmap drawable res/drawable/img_gunlun11_untitled_2_30.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_gunlun11_untitled_2_31.png: Warning: Found bitmap drawable res/drawable/img_gunlun11_untitled_2_31.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_gunlun11_untitled_2_42.png: Warning: Found bitmap drawable res/drawable/img_gunlun11_untitled_2_42.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_gunlun11_untitled_2_46.png: Warning: Found bitmap drawable res/drawable/img_gunlun11_untitled_2_46.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_gunlun11_untitled_2_50.png: Warning: Found bitmap drawable res/drawable/img_gunlun11_untitled_2_50.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_gunlun11_untitled_2_recovered_1.png: Warning: Found bitmap drawable res/drawable/img_gunlun11_untitled_2_recovered_1.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_gunlun11_untitled_2_recovered_14.png: Warning: Found bitmap drawable res/drawable/img_gunlun11_untitled_2_recovered_14.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_gunlun12_untitled_241.png: Warning: Found bitmap drawable res/drawable/img_gunlun12_untitled_241.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_gunlun12_untitled_2_2.png: Warning: Found bitmap drawable res/drawable/img_gunlun12_untitled_2_2.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_gunlun12_untitled_2_31.png: Warning: Found bitmap drawable res/drawable/img_gunlun12_untitled_2_31.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_gunlun12_untitled_2_42.png: Warning: Found bitmap drawable res/drawable/img_gunlun12_untitled_2_42.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_gunlun12_untitled_2_44.png: Warning: Found bitmap drawable res/drawable/img_gunlun12_untitled_2_44.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_gunlun12_untitled_2_46.png: Warning: Found bitmap drawable res/drawable/img_gunlun12_untitled_2_46.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_gunlun12_untitled_2_47.png: Warning: Found bitmap drawable res/drawable/img_gunlun12_untitled_2_47.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_gunlun12_untitled_2_50.png: Warning: Found bitmap drawable res/drawable/img_gunlun12_untitled_2_50.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_gunlun12_untitled_2_recovered_14.png: Warning: Found bitmap drawable res/drawable/img_gunlun12_untitled_2_recovered_14.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_gunlun12_untitled_2_recovered_18.png: Warning: Found bitmap drawable res/drawable/img_gunlun12_untitled_2_recovered_18.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_gunlun1_bg.png: Warning: Found bitmap drawable res/drawable/img_gunlun1_bg.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_gunlun1_untitled_150.png: Warning: Found bitmap drawable res/drawable/img_gunlun1_untitled_150.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_gunlun1_untitled_1_50.png: Warning: Found bitmap drawable res/drawable/img_gunlun1_untitled_1_50.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_gunlun1_untitled_1_recovered_5.png: Warning: Found bitmap drawable res/drawable/img_gunlun1_untitled_1_recovered_5.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_gunlun2_untitled_1.png: Warning: Found bitmap drawable res/drawable/img_gunlun2_untitled_1.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_gunlun2_untitled_2.png: Warning: Found bitmap drawable res/drawable/img_gunlun2_untitled_2.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_gunlun2_untitled_2_30.png: Warning: Found bitmap drawable res/drawable/img_gunlun2_untitled_2_30.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_gunlun2_untitled_2_recovered_1.png: Warning: Found bitmap drawable res/drawable/img_gunlun2_untitled_2_recovered_1.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_gunlun2_untitled_3.png: Warning: Found bitmap drawable res/drawable/img_gunlun2_untitled_3.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_gunlun2_untitled_4.png: Warning: Found bitmap drawable res/drawable/img_gunlun2_untitled_4.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_gunlun2_untitled_5.png: Warning: Found bitmap drawable res/drawable/img_gunlun2_untitled_5.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_gunlun2_untitled_6.png: Warning: Found bitmap drawable res/drawable/img_gunlun2_untitled_6.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_gunlun2_untitled_7.png: Warning: Found bitmap drawable res/drawable/img_gunlun2_untitled_7.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_gunlun2_untitled_8.png: Warning: Found bitmap drawable res/drawable/img_gunlun2_untitled_8.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_gunlun2_untitled_9.png: Warning: Found bitmap drawable res/drawable/img_gunlun2_untitled_9.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_gunlun3_rect6.png: Warning: Found bitmap drawable res/drawable/img_gunlun3_rect6.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_gunlun4_untitled_2_33.png: Warning: Found bitmap drawable res/drawable/img_gunlun4_untitled_2_33.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_gunlun4_untitled_2_38.png: Warning: Found bitmap drawable res/drawable/img_gunlun4_untitled_2_38.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_gunlun4_untitled_2_recovered_16.png: Warning: Found bitmap drawable res/drawable/img_gunlun4_untitled_2_recovered_16.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_gunlun5_rect16.png: Warning: Found bitmap drawable res/drawable/img_gunlun5_rect16.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_gunlun5_untitled_232.png: Warning: Found bitmap drawable res/drawable/img_gunlun5_untitled_232.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_gunlun5_untitled_2_24.png: Warning: Found bitmap drawable res/drawable/img_gunlun5_untitled_2_24.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_gunlun5_untitled_2_26.png: Warning: Found bitmap drawable res/drawable/img_gunlun5_untitled_2_26.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_gunlun5_untitled_2_28.png: Warning: Found bitmap drawable res/drawable/img_gunlun5_untitled_2_28.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_gunlun5_untitled_2_30.png: Warning: Found bitmap drawable res/drawable/img_gunlun5_untitled_2_30.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_gunlun5_untitled_2_31.png: Warning: Found bitmap drawable res/drawable/img_gunlun5_untitled_2_31.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_gunlun5_untitled_2_32.png: Warning: Found bitmap drawable res/drawable/img_gunlun5_untitled_2_32.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_gunlun5_untitled_2_33.png: Warning: Found bitmap drawable res/drawable/img_gunlun5_untitled_2_33.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_gunlun5_untitled_2_recovered_14.png: Warning: Found bitmap drawable res/drawable/img_gunlun5_untitled_2_recovered_14.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_gunlun7_rect251.png: Warning: Found bitmap drawable res/drawable/img_gunlun7_rect251.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_gunlun7_untitled_232.png: Warning: Found bitmap drawable res/drawable/img_gunlun7_untitled_232.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_gunlun7_untitled_2_24.png: Warning: Found bitmap drawable res/drawable/img_gunlun7_untitled_2_24.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_gunlun7_untitled_2_26.png: Warning: Found bitmap drawable res/drawable/img_gunlun7_untitled_2_26.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_gunlun7_untitled_2_28.png: Warning: Found bitmap drawable res/drawable/img_gunlun7_untitled_2_28.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_gunlun7_untitled_2_30.png: Warning: Found bitmap drawable res/drawable/img_gunlun7_untitled_2_30.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_gunlun7_untitled_2_31.png: Warning: Found bitmap drawable res/drawable/img_gunlun7_untitled_2_31.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_gunlun8_untitled_232.png: Warning: Found bitmap drawable res/drawable/img_gunlun8_untitled_232.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_gunlun8_untitled_2_24.png: Warning: Found bitmap drawable res/drawable/img_gunlun8_untitled_2_24.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_gunlun8_untitled_2_26.png: Warning: Found bitmap drawable res/drawable/img_gunlun8_untitled_2_26.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_gunlun8_untitled_2_28.png: Warning: Found bitmap drawable res/drawable/img_gunlun8_untitled_2_28.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_gunlun8_untitled_2_33.png: Warning: Found bitmap drawable res/drawable/img_gunlun8_untitled_2_33.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_gunlun8_untitled_2_38.png: Warning: Found bitmap drawable res/drawable/img_gunlun8_untitled_2_38.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_gunlun8_untitled_2_41.png: Warning: Found bitmap drawable res/drawable/img_gunlun8_untitled_2_41.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_gunlun8_untitled_2_44.png: Warning: Found bitmap drawable res/drawable/img_gunlun8_untitled_2_44.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_gunlun8_untitled_2_recovered_1.png: Warning: Found bitmap drawable res/drawable/img_gunlun8_untitled_2_recovered_1.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_gunlun8_untitled_2_recovered_14.png: Warning: Found bitmap drawable res/drawable/img_gunlun8_untitled_2_recovered_14.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_gunlun9_untitled_232.png: Warning: Found bitmap drawable res/drawable/img_gunlun9_untitled_232.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_gunlun9_untitled_2_26.png: Warning: Found bitmap drawable res/drawable/img_gunlun9_untitled_2_26.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_gunlun9_untitled_2_28.png: Warning: Found bitmap drawable res/drawable/img_gunlun9_untitled_2_28.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_gunlun9_untitled_2_33.png: Warning: Found bitmap drawable res/drawable/img_gunlun9_untitled_2_33.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_gunlun9_untitled_2_38.png: Warning: Found bitmap drawable res/drawable/img_gunlun9_untitled_2_38.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_gunlun9_untitled_2_41.png: Warning: Found bitmap drawable res/drawable/img_gunlun9_untitled_2_41.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_gunlun9_untitled_2_44.png: Warning: Found bitmap drawable res/drawable/img_gunlun9_untitled_2_44.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_gunlun9_untitled_2_47.png: Warning: Found bitmap drawable res/drawable/img_gunlun9_untitled_2_47.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_gunlun9_untitled_2_recovered_17.png: Warning: Found bitmap drawable res/drawable/img_gunlun9_untitled_2_recovered_17.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_gunlun9_untitled_2_recovered_18.png: Warning: Found bitmap drawable res/drawable/img_gunlun9_untitled_2_recovered_18.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_home1_btn1.png: Warning: Found bitmap drawable res/drawable/img_home1_btn1.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_home1_btn2.png: Warning: Found bitmap drawable res/drawable/img_home1_btn2.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_home1_btn3.png: Warning: Found bitmap drawable res/drawable/img_home1_btn3.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_home1_btn4.png: Warning: Found bitmap drawable res/drawable/img_home1_btn4.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_home1_panda_waist.png: Warning: Found bitmap drawable res/drawable/img_home1_panda_waist.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_home_bg.png: Warning: Found bitmap drawable res/drawable/img_home_bg.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_home_guide_bubble_left_tail.png: Warning: Found bitmap drawable res/drawable/img_home_guide_bubble_left_tail.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_home_panda_1.png: Warning: Found bitmap drawable res/drawable/img_home_panda_1.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_home_panda_2.png: Warning: Found bitmap drawable res/drawable/img_home_panda_2.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_home_wind_mask.png: Warning: Found bitmap drawable res/drawable/img_home_wind_mask.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_houshan_bg.png: Warning: Found bitmap drawable res/drawable/img_houshan_bg.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_luggage_panda.png: Warning: Found bitmap drawable res/drawable/img_luggage_panda.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_panda_launch.png: Warning: Found bitmap drawable res/drawable/img_panda_launch.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_pill_btn_bg.png: Warning: Found bitmap drawable res/drawable/img_pill_btn_bg.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_progress_modal_bg.png: Warning: Found bitmap drawable res/drawable/img_progress_modal_bg.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_settings_paper_panel.png: Warning: Found bitmap drawable res/drawable/img_settings_paper_panel.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_shengtu_bg.png: Warning: Found bitmap drawable res/drawable/img_shengtu_bg.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_shilian2_bg.png: Warning: Found bitmap drawable res/drawable/img_shilian2_bg.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_shilian2_recovered_8.png: Warning: Found bitmap drawable res/drawable/img_shilian2_recovered_8.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_shilian3_cloud.png: Warning: Found bitmap drawable res/drawable/img_shilian3_cloud.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_shilian_bg.png: Warning: Found bitmap drawable res/drawable/img_shilian_bg.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_shilian_panda.png: Warning: Found bitmap drawable res/drawable/img_shilian_panda.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_shilian_recovered_4.png: Warning: Found bitmap drawable res/drawable/img_shilian_recovered_4.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_shilian_rect156.png: Warning: Found bitmap drawable res/drawable/img_shilian_rect156.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_shilian_return.png: Warning: Found bitmap drawable res/drawable/img_shilian_return.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_unfinished_bg.png: Warning: Found bitmap drawable res/drawable/img_unfinished_bg.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_unfinished_compact124.png: Warning: Found bitmap drawable res/drawable/img_unfinished_compact124.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_unfinished_image134.png: Warning: Found bitmap drawable res/drawable/img_unfinished_image134.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_unfinished_image307.png: Warning: Found bitmap drawable res/drawable/img_unfinished_image307.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_unfinished_text.png: Warning: Found bitmap drawable res/drawable/img_unfinished_text.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_work_1.png: Warning: Found bitmap drawable res/drawable/img_work_1.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_work_2.png: Warning: Found bitmap drawable res/drawable/img_work_2.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_wushuhuan_book_01.png: Warning: Found bitmap drawable res/drawable/img_wushuhuan_book_01.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_wushuhuan_book_02.png: Warning: Found bitmap drawable res/drawable/img_wushuhuan_book_02.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_wushuhuan_book_03.png: Warning: Found bitmap drawable res/drawable/img_wushuhuan_book_03.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_wushuhuan_book_04.png: Warning: Found bitmap drawable res/drawable/img_wushuhuan_book_04.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_wushuhuan_book_05.png: Warning: Found bitmap drawable res/drawable/img_wushuhuan_book_05.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_wushuhuan_book_06.png: Warning: Found bitmap drawable res/drawable/img_wushuhuan_book_06.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_wushuhuan_book_07.png: Warning: Found bitmap drawable res/drawable/img_wushuhuan_book_07.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_wushuhuan_book_08.png: Warning: Found bitmap drawable res/drawable/img_wushuhuan_book_08.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_wushuhuan_book_09.png: Warning: Found bitmap drawable res/drawable/img_wushuhuan_book_09.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_wushuhuan_book_10.png: Warning: Found bitmap drawable res/drawable/img_wushuhuan_book_10.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_xiulian_bg.png: Warning: Found bitmap drawable res/drawable/img_xiulian_bg.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_xiulian_group128.png: Warning: Found bitmap drawable res/drawable/img_xiulian_group128.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_xiulian_group17.png: Warning: Found bitmap drawable res/drawable/img_xiulian_group17.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_xiulian_return.png: Warning: Found bitmap drawable res/drawable/img_xiulian_return.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_yanwuchang_bg.png: Warning: Found bitmap drawable res/drawable/img_yanwuchang_bg.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_yanwuchang_panda.png: Warning: Found bitmap drawable res/drawable/img_yanwuchang_panda.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_yanwuchang_un50.png: Warning: Found bitmap drawable res/drawable/img_yanwuchang_un50.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_yanwuchang_un50_1.png: Warning: Found bitmap drawable res/drawable/img_yanwuchang_un50_1.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_zaowu_51.png: Warning: Found bitmap drawable res/drawable/img_zaowu_51.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_zaowu_bg_shadow_v2.png: Warning: Found bitmap drawable res/drawable/img_zaowu_bg_shadow_v2.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_zaowu_directional_fog_v2.png: Warning: Found bitmap drawable res/drawable/img_zaowu_directional_fog_v2.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_zaowu_figure.png: Warning: Found bitmap drawable res/drawable/img_zaowu_figure.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_zaowu_return.png: Warning: Found bitmap drawable res/drawable/img_zaowu_return.png in densityless folder [IconLocation]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\polygon_3.png: Warning: Found bitmap drawable res/drawable/polygon_3.png in densityless folder [IconLocation]
+
+   Explanation for issues of type "IconLocation":
+   The res/drawable folder is intended for density-independent graphics such
+   as shapes defined in XML. For bitmaps, move it to drawable-mdpi and
+   consider providing higher and lower resolution versions in drawable-ldpi,
+   drawable-hdpi and drawable-xhdpi. If the icon really is density independent
+   (for example a solid color) you can place it in drawable-nodpi.
+
+   https://developer.android.com/guide/practices/screens_support.html
+
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable-xxhdpi\img_chuangzuodangan5_image52.png: Warning: The following unrelated icon files have identical contents: img_chuangzuodangan3_image52.png, img_chuangzuodangan5_image52.png [IconDuplicates]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_gunlun12_untitled_241.png: Warning: The following unrelated icon files have identical contents: img_gunlun13_untitled_241.png, img_gunlun11_untitled_241.png, img_gunlun12_untitled_241.png [IconDuplicates]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_gunlun12_untitled_2_2.png: Warning: The following unrelated icon files have identical contents: img_gunlun13_untitled_2_2.png, img_gunlun14_untitled_2_2.png, img_gunlun15_untitled_2_2.png, img_gunlun11_untitled_2_2.png, img_gunlun12_untitled_2_2.png [IconDuplicates]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_gunlun12_untitled_2_42.png: Warning: The following unrelated icon files have identical contents: img_gunlun13_untitled_2_42.png, img_gunlun11_untitled_2_42.png, img_gunlun12_untitled_2_42.png [IconDuplicates]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_gunlun12_untitled_2_46.png: Warning: The following unrelated icon files have identical contents: img_gunlun13_untitled_2_46.png, img_gunlun14_untitled_2_46.png, img_gunlun15_untitled_2_46.png, img_gunlun11_untitled_2_46.png, img_gunlun12_untitled_2_46.png [IconDuplicates]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_gunlun12_untitled_2_50.png: Warning: The following unrelated icon files have identical contents: img_gunlun13_untitled_2_50.png, img_gunlun14_untitled_2_50.png, img_gunlun11_untitled_2_50.png, img_gunlun12_untitled_2_50.png [IconDuplicates]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable-nodpi\img_gunlun14_untitled_2_56.png: Warning: The following unrelated icon files have identical contents: img_gunlun13_untitled_2_56.png, img_gunlun14_untitled_2_56.png [IconDuplicates]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_gunlun4_untitled_2_recovered_16.png: Warning: The following unrelated icon files have identical contents: img_gunlun10_untitled_2_recovered_16.png, img_gunlun4_untitled_2_recovered_16.png [IconDuplicates]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_gunlun5_untitled_2_32.png: Warning: The following unrelated icon files have identical contents: img_gunlun10_untitled_2_32.png, img_gunlun5_untitled_2_32.png [IconDuplicates]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_gunlun7_untitled_2_30.png: Warning: The following unrelated icon files have identical contents: img_gunlun10_untitled_2_30.png, img_gunlun11_untitled_2_30.png, img_gunlun2_untitled_2_30.png, img_gunlun5_untitled_2_30.png, img_gunlun7_untitled_2_30.png [IconDuplicates]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_gunlun7_untitled_2_31.png: Warning: The following unrelated icon files have identical contents: img_gunlun13_untitled_2_31.png, img_gunlun14_untitled_2_31.png, img_gunlun15_untitled_2_31.png, img_gunlun10_untitled_2_31.png, img_gunlun11_untitled_2_31.png, img_gunlun12_untitled_2_31.png, img_gunlun5_untitled_2_31.png, img_gunlun7_untitled_2_31.png [IconDuplicates]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_gunlun8_untitled_2_24.png: Warning: The following unrelated icon files have identical contents: img_gunlun15_untitled_2_24.png, img_gunlun10_untitled_2_24.png, img_gunlun11_untitled_2_24.png, img_gunlun5_untitled_2_24.png, img_gunlun7_untitled_2_24.png, img_gunlun8_untitled_2_24.png [IconDuplicates]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_gunlun8_untitled_2_recovered_1.png: Warning: The following unrelated icon files have identical contents: img_gunlun10_untitled_2_recovered_1.png, img_gunlun11_untitled_2_recovered_1.png, img_gunlun2_untitled_2_recovered_1.png, img_gunlun8_untitled_2_recovered_1.png [IconDuplicates]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_gunlun8_untitled_2_recovered_14.png: Warning: The following unrelated icon files have identical contents: img_gunlun11_untitled_2_recovered_14.png, img_gunlun12_untitled_2_recovered_14.png, img_gunlun5_untitled_2_recovered_14.png, img_gunlun8_untitled_2_recovered_14.png [IconDuplicates]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_gunlun9_untitled_232.png: Warning: The following unrelated icon files have identical contents: img_gunlun14_untitled_232.png, img_gunlun15_untitled_232.png, img_gunlun10_untitled_232.png, img_gunlun5_untitled_232.png, img_gunlun7_untitled_232.png, img_gunlun8_untitled_232.png, img_gunlun9_untitled_232.png [IconDuplicates]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_gunlun9_untitled_2_26.png: Warning: The following unrelated icon files have identical contents: img_gunlun10_untitled_2_26.png, img_gunlun5_untitled_2_26.png, img_gunlun7_untitled_2_26.png, img_gunlun8_untitled_2_26.png, img_gunlun9_untitled_2_26.png [IconDuplicates]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_gunlun9_untitled_2_28.png: Warning: The following unrelated icon files have identical contents: img_gunlun15_untitled_2_28.png, img_gunlun10_untitled_2_28.png, img_gunlun5_untitled_2_28.png, img_gunlun7_untitled_2_28.png, img_gunlun8_untitled_2_28.png, img_gunlun9_untitled_2_28.png [IconDuplicates]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_gunlun9_untitled_2_33.png: Warning: The following unrelated icon files have identical contents: img_gunlun10_untitled_2_33.png, img_gunlun4_untitled_2_33.png, img_gunlun5_untitled_2_33.png, img_gunlun8_untitled_2_33.png, img_gunlun9_untitled_2_33.png [IconDuplicates]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_gunlun9_untitled_2_38.png: Warning: The following unrelated icon files have identical contents: img_gunlun14_untitled_2_38.png, img_gunlun15_untitled_2_38.png, img_gunlun4_untitled_2_38.png, img_gunlun8_untitled_2_38.png, img_gunlun9_untitled_2_38.png [IconDuplicates]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_gunlun9_untitled_2_41.png: Warning: The following unrelated icon files have identical contents: img_gunlun8_untitled_2_41.png, img_gunlun9_untitled_2_41.png [IconDuplicates]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_gunlun9_untitled_2_44.png: Warning: The following unrelated icon files have identical contents: img_gunlun13_untitled_2_44.png, img_gunlun14_untitled_2_44.png, img_gunlun15_untitled_2_44.png, img_gunlun12_untitled_2_44.png, img_gunlun8_untitled_2_44.png, img_gunlun9_untitled_2_44.png [IconDuplicates]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_gunlun9_untitled_2_47.png: Warning: The following unrelated icon files have identical contents: img_gunlun12_untitled_2_47.png, img_gunlun9_untitled_2_47.png [IconDuplicates]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_gunlun9_untitled_2_recovered_17.png: Warning: The following unrelated icon files have identical contents: img_gunlun13_untitled_2_recovered_17.png, img_gunlun14_untitled_2_recovered_17.png, img_gunlun15_untitled_2_recovered_17.png, img_gunlun9_untitled_2_recovered_17.png [IconDuplicates]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_gunlun9_untitled_2_recovered_18.png: Warning: The following unrelated icon files have identical contents: img_gunlun13_untitled_2_recovered_18.png, img_gunlun14_untitled_2_recovered_18.png, img_gunlun15_untitled_2_recovered_18.png, img_gunlun12_untitled_2_recovered_18.png, img_gunlun9_untitled_2_recovered_18.png [IconDuplicates]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_unfinished_bg.png: Warning: The following unrelated icon files have identical contents: img_volume1_bg.png, img_unfinished_bg.png [IconDuplicates]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_xiulian_group128.png: Warning: The following unrelated icon files have identical contents: img_home1_btn2.png, img_xiulian_group128.png [IconDuplicates]
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res\drawable\img_zaowu_return.png: Warning: The following unrelated icon files have identical contents: img_gongfang_return.png, img_xiulian_return.png, img_zaowu_return.png [IconDuplicates]
+
+   Explanation for issues of type "IconDuplicates":
+   If an icon is repeated under different names, you can consolidate and just
+   use one of the icons and delete the others to make your application
+   smaller. However, duplicated icons usually are not intentional and can
+   sometimes point to icons that were accidentally overwritten or accidentally
+   not updated.
+
+<HANDOVER_ROOT>\Appproject\android\app\src\main\res: Warning: Missing density variation folders in src\main\res: drawable-hdpi, drawable-mdpi, drawable-xhdpi [IconMissingDensityFolder]
+
+   Explanation for issues of type "IconMissingDensityFolder":
+   Icons will look best if a custom version is provided for each of the major
+   screen density classes (low, medium, high, extra-high, extra-extra-high).
+   This lint check identifies folders which are missing, such as
+   drawable-hdpi.
+
+   Low density is not really used much anymore, so this check ignores the ldpi
+   density. To force lint to include it, set the environment variable
+   ANDROID_LINT_INCLUDE_LDPI=true. For more information on current density
+   usage, see https://developer.android.com/about/dashboards
+
+   https://developer.android.com/guide/practices/screens_support.html
+
+0 errors, 219 warnings

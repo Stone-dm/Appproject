@@ -1,0 +1,12 @@
+{
+  "kind": "rebuilt",
+  "passed": true,
+  "fresh_data": true,
+  "online_ai": false,
+  "http_checks": 37,
+  "manual_count": 50,
+  "restart_saved_conversation": true,
+  "persistent_media_downloads": 6,
+  "elapsed_seconds": 10.81,
+  "scope": "Public HTTP workflow and persistence with fresh isolated data; no Android UI interaction"
+}
