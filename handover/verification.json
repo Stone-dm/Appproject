@@ -1,0 +1,142 @@
+{
+  "recorded_at": "2026-10-11T17:06:33.875530+08:00",
+  "scope": "在独立交接目录验证当前源码。不是另一台全新电脑或生产环境验收。",
+  "environment": {
+    "os": "Windows x64",
+    "python": "3.13.2",
+    "jdk": "Android Studio JBR 21",
+    "android_sdk": 35,
+    "android_dependencies": "本机已安装 SDK/JDK；使用 Gradle 缓存、--offline"
+  },
+  "passed": {
+    "fresh_offline_python_setup": {
+      "passed": true,
+      "fresh_venv": true,
+      "fresh_local_config": true,
+      "package_index_disabled": true,
+      "dependency_check": "No broken requirements found",
+      "elapsed_seconds": 20.63,
+      "scope": "Relocated source subset with complete backend and handover tools; Windows x64 / Python 3.13 already installed. Dependencies from bundled wheels only."
+    },
+    "backend": {
+      "command": "py -3.13 handover/manage.py test",
+      "tests": 130,
+      "warnings": 1,
+      "fresh_relocated_venv": true,
+      "isolated_working_directory": true
+    },
+    "main_android": {
+      "command": "manage.py build-android --variant debug --java-home JDK21 --offline",
+      "assemble_debug": true,
+      "lint_debug": {
+        "errors": 0,
+        "warnings": 219,
+        "informational": 3,
+        "by_issue": {
+          "OldTargetApi": 1,
+          "InvalidColorHexValue": 1,
+          "ModifierParameter": 2,
+          "AutoboxingStateCreation": 3,
+          "UseOfNonLambdaOffsetOverload": 1,
+          "IconLauncherShape": 5,
+          "IconDuplicatesConfig": 6,
+          "IconLocation": 175,
+          "IconDuplicates": 27,
+          "IconMissingDensityFolder": 1
+        }
+      },
+      "unit_tests": {
+        "report_files": 10,
+        "tests": 50,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "extra_validation": ":app:testDebugUnitTest --rerun-tasks --no-build-cache --offline; 24 tasks executed"
+    },
+    "offline_rebuild": {
+      "command": "handover/build_offline.py --java-home JDK21 --output NEW_DIRECTORY --offline-gradle",
+      "apk": true,
+      "pyinstaller_exe": true,
+      "unit_tests": {
+        "report_files": 10,
+        "tests": 50,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "shipped_runtime": "本次重建版本；运行文件哈希见 verification/offline-build-manifest.json"
+    },
+    "offline_source_runtime": {
+      "kind": "source",
+      "passed": true,
+      "fresh_data": true,
+      "online_ai": false,
+      "http_checks": 40,
+      "manual_count": 50,
+      "restart_saved_conversation": true,
+      "persistent_media_downloads": 6,
+      "elapsed_seconds": 25.27,
+      "scope": "Public HTTP workflow and persistence with fresh isolated data; no Android UI interaction"
+    },
+    "shipped_exe_runtime": {
+      "kind": "rebuilt",
+      "passed": true,
+      "fresh_data": true,
+      "online_ai": false,
+      "http_checks": 37,
+      "manual_count": 50,
+      "restart_saved_conversation": true,
+      "persistent_media_downloads": 6,
+      "elapsed_seconds": 10.81,
+      "scope": "Public HTTP workflow and persistence with fresh isolated data; no Android UI interaction"
+    },
+    "previous_exe_baseline_runtime": {
+      "kind": "exe",
+      "passed": true,
+      "fresh_data": true,
+      "online_ai": false,
+      "http_checks": 36,
+      "manual_count": 50,
+      "restart_saved_conversation": true,
+      "persistent_media_downloads": 6,
+      "elapsed_seconds": 30.66,
+      "scope": "Public HTTP workflow and persistence with fresh isolated data; no Android UI interaction"
+    },
+    "docker_compose": {
+      "config_only": true,
+      "project_services_started": false
+    },
+    "alembic": {
+      "head": "0026_video_media (head)",
+      "database_migration_executed": false
+    },
+    "configuration_idempotence": {
+      "existing_files_checked": 3,
+      "files_preserved": true
+    },
+    "handover_syntax": true
+  },
+  "issues_resolved_during_handover": [
+    "补齐 hatchling editable 安装所需 editables wheel；全新环境离线安装和 pip check 已通过。",
+    "测试入口隔离 .env 和继承的 JIANGHU_* 变量，避免模块导入意外依赖本地 MinIO。",
+    "PyInstaller spec 改为相对路径，显式优先收集离线源码；重建并实测 EXE。"
+  ],
+  "remaining_warnings": [
+    "Android Lint 0 errors / 219 warnings / 3 information；未为交接改写业务 UI。",
+    "后端 pytest 报告 1 条 warning；详细类别因原配置 --disable-warnings 未展开。",
+    "PyInstaller 报告可选隐藏导入 pycparser.lextab/yacctab、pysqlite2、MySQLdb、psycopg2 缺失；离线 SQLite HTTP 和重启路径实测通过，不宣称其他数据库驱动可用。"
+  ],
+  "not_performed": [
+    "Android 真机/模拟器安装与 UI 全流程；本次没有覆盖设备数据。",
+    "完整 Compose 栈拉起、生产 PostgreSQL 迁移或历史备份恢复。",
+    "在线模型/短信付费调用、生产域名 HTTPS、生产审核、压力测试。",
+    "正式 Release 签名和应用商店发布；生产签名私钥不在包内。",
+    "另一台没有 Python/SDK/JDK/Gradle 缓存的全新电脑；工具链需自行安装。"
+  ],
+  "package_integrity": {
+    "internal_manifest": "handover/package-manifest.json",
+    "external_zip_sha256": "同目录 .zip.sha256 文件",
+    "note": "最终 ZIP CRC/逐项 SHA256 验证结果在包外 handover-package-summary.json；解压后可执行 manage.py verify-package。"
+  }
+}

@@ -1,5 +1,7 @@
 # CODE-AUDIT — 2026-09-11 (Vol-2 注释对齐批 + 周边屏幕)
 
+> 历史快照，仅用于解释源码引用；以下问题和结论均属于当时检查，不代表当前状态。
+
 > v3 代码审计快照。覆盖刚合并到 main 的 `b04d25f`(Vol-2-10~15 注释对齐 + 8e5cded doc-only commit + ac6a168 refactor + 上一批次 Vol-2-7/8/9/Vol-1-14/catch-up batch Vol-2-13/14/15/Vol-3-1)。8 个评审角度并行(line-by-line diff / removed-behavior / cross-file tracer / efficiency+altitude / reuse+simplification / language-pitfall / wrapper-proxy / conventions) + 2 个 verify pass。**核心结论:Vol-2 doc 批本身无 runtime bug,但暴露出 5+ 处 Vol-2-7/8/9 的 pre-existing KDoc/注释漂移,且项目最严重的 9-screen copy-paste 问题未在 `ac6a168` "refactor" commit 中得到解决**。
 
 ---
@@ -167,5 +169,5 @@
 
 ## 备注
 
-- 本次审计范围是 `b04d25f` 合并引入的 16 Kotlin + 6 PNG + 1 md,**未覆盖** v1/v2 audit 中已识别的 9 个 maintainability HIGH(`BookShelfScaffold` / `LearningPageChrome` / `BookFrameScaffold` 等)— 见 [SESSION-LOG-2026-09-11.md § 当前状态](docs/SESSION-LOG-2026-09-11.md)
+- 本次审计范围是 `b04d25f` 合并引入的 16 Kotlin + 6 PNG + 1 md,**未覆盖** v1/v2 audit 中已识别的 9 个 maintainability HIGH(`BookShelfScaffold` / `LearningPageChrome` / `BookFrameScaffold` 等)— 见 Git 历史中的会话记录（`git show b5d2c8c:docs/SESSION-LOG-2026-09-11.md`）
 - "Vol-2 doc 批本身 0 runtime bug" 是结论,但本次审计同时暴露了**已经在 main 上、之前未被识别的 pre-existing 缺陷**(Vol-2-7/8/9 stale、duplicate Learning3)— 这些不是本批次引入的,但既然在 audit 范围内,应当列出

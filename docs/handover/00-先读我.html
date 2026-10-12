@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>00-先读我 · 机巧江湖项目交接</title><style>:root{color-scheme:light;--ink:#192e3a;--muted:#526575;--accent:#087c86;--line:#dbe5ea}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#f3f6f8;color:var(--ink);font:16px/1.85 "Microsoft YaHei","PingFang SC",system-ui,sans-serif}
+header{background:#152e3a;color:white;padding:30px max(24px,calc((100vw - 1120px)/2));border-bottom:5px solid #13a8ad}header p{margin:6px 0;color:#c7dce4;font-size:14px}header a{color:#c9fcff}
+.layout{max-width:1240px;margin:auto;display:grid;grid-template-columns:250px minmax(0,1fr);gap:30px;padding:30px 26px}nav{position:sticky;top:20px;max-height:94vh;overflow:auto;align-self:start;font-size:14px}nav a{display:block;padding:7px 0;border-bottom:1px solid var(--line)}main{background:white;min-width:0;padding:34px 46px;border:1px solid var(--line);border-radius:8px}
+h1{font-size:30px;line-height:1.4;margin-top:0}h2{font-size:23px;margin:44px 0 20px;padding-top:18px;border-top:2px solid var(--line);scroll-margin-top:24px}h3{font-size:18px;margin-top:30px;scroll-margin-top:24px}a{color:var(--accent);text-decoration:none;overflow-wrap:anywhere}a:hover{text-decoration:underline}p,li{overflow-wrap:break-word}li{margin-bottom:7px}code{background:#edf3f6;padding:2px 5px;border-radius:4px;font:0.88em/1.6 Consolas,"Microsoft YaHei",monospace;overflow-wrap:anywhere}pre{background:#eef4f7;border-left:3px solid #2997a3;padding:18px;overflow:auto;line-height:1.65}pre code{padding:0;background:none;white-space:pre}blockquote{border-left:4px solid #19a3a8;padding:10px 20px;margin:22px 0;background:#eff9f8}blockquote p{margin:6px 0}.notice{font-size:14px;color:var(--muted)}footer{text-align:center;color:var(--muted);padding:24px;font-size:13px}
+@media(max-width:900px){.layout{display:block;padding:16px}nav{position:static;max-height:none;margin:0 0 20px}main{padding:26px 22px}}@media print{body{background:white;font-size:11pt}.layout{display:block;padding:0}nav,header,footer{display:none}main{border:0;padding:0}pre{white-space:pre-wrap;overflow:visible}pre code{white-space:pre-wrap}h2,h3{break-after:avoid}a{color:inherit}}</style></head>
+<body><header><strong>机巧江湖 · 项目交接</strong><p>2026-10-11 / 完整源码、运行与维护说明</p><a href="00-先读我.html">首次使用</a> · <a href="项目交接文档.html">完整文档</a> · <a href="../../handover/project.json">AI 项目地图</a></header>
+<div class="layout"><nav aria-label="章节目录"><a href="#只想先运行项目">只想先运行项目</a>
+<a href="#准备继续开发">准备继续开发</a>
+<a href="#先知道的交接边界">先知道的交接边界</a>
+<a href="#收到文件后校验">收到文件后校验</a></nav><main><p class="notice">此页由同名 Markdown 生成，可离线阅读。源码与附录链接须保持完整交接目录结构。</p><h1 id="机巧江湖项目交接先读这里">机巧江湖项目交接：先读这里</h1>
+<blockquote>
+<p><strong>阅读范围：2026-10-11 完整 ZIP 交接快照。</strong> 本文的根目录、目录树与命令按完整交接包解释；仅克隆 Git 仓库时，请先按 <a href="../../handover/README.md">Git 仓库使用说明</a> 初始化。独立离线源码、体验 EXE/APK、依赖 wheel 和设计原件由完整 ZIP 另行交付，不随本仓库克隆。本文记录交接时的未提交状态，Git 当前提交状态请用 <code>git status</code> 核对。</p>
+</blockquote>
+<p>交接日期：2026-10-11。此包交付完整开发源码、必要资源、设计资料、测试、工具和一份可运行的离线体验版。</p>
+<h2 id="只想先运行项目">只想先运行项目</h2>
+<ol>
+<li>完整解压交接 ZIP 到可写目录，例如 <code>D:/Projects/JiqiaoJianghu/</code>。不要在压缩包内运行。</li>
+<li>打开 <code>体验运行/启动本地演示.exe</code>，保持窗口开启，等待服务启动。</li>
+<li>在 Android 手机或 Android Studio 模拟器安装 <code>体验运行/机巧江湖_本地演示.apk</code>。</li>
+<li>手机与电脑同一局域网时，填写 EXE 窗口显示的电脑地址；Android Studio 模拟器通常填 <code>http://10.0.2.2:8011</code>。</li>
+<li>登录账号 <code>13900000001</code>，备用 <code>13900000002</code>，密码均为 <code>JqjhReview2026!</code>。这些是程序创建的虚拟离线账号。</li>
+</ol>
+<p>该入口不需要安装 Python、Docker 或开发工具。EXE 面向 Windows x64；APK 最低 Android 7.0。离线教练、图片和评审使用规则/程序模拟，不会调用在线 AI；不代表线上模型效果。首次运行会在程序附近创建本地数据，正常退出后保留。</p>
+<h2 id="准备继续开发">准备继续开发</h2>
+<ol>
+<li><p>阅读 <a href="%E9%A1%B9%E7%9B%AE%E4%BA%A4%E6%8E%A5%E6%96%87%E6%A1%A3.md">完整项目交接文档</a>，也可双击 <a href="%E9%A1%B9%E7%9B%AE%E4%BA%A4%E6%8E%A5%E6%96%87%E6%A1%A3.html">浏览器阅读版</a>。AI 同时阅读 <a href="../../handover/project.json">项目地图</a> 和 <a href="../../CONTRIBUTING.md">协作约定</a>。</p>
+</li>
+<li><p>安装 Windows x64 的 Python 3.13；修改 Android 还需 Android Studio、JDK/JBR 21、Android SDK 35。</p>
+</li>
+<li><p>在解压根目录运行：</p>
+<pre><code class="language-powershell">py -3.13 handover/manage.py doctor
+py -3.13 handover/manage.py setup
+py -3.13 handover/manage.py test
+</code></pre>
+</li>
+<li><p>主开发入口是 <code>Appproject/</code>；Android Studio 打开 <code>Appproject/android/</code>。后端入口是 <code>Appproject/services/api/</code>。</p>
+</li>
+<li><p>首次构建 Android 需要联网获取 Gradle/Maven 依赖；完整服务器部署需要 Docker 镜像。本包附带 Python 依赖，不附带 SDK、JDK、Docker 镜像或整套 Gradle 缓存。</p>
+</li>
+</ol>
+<h2 id="先知道的交接边界">先知道的交接边界</h2>
+<ul>
+<li>包含当前工作树修改；Git 基准提交是来源标记，不等于交接内容已经提交。没有替你提交或推送。</li>
+<li>未打包原机器 <code>.env</code>、<code>local.properties</code>、密钥、签名私钥、Git 历史或 Python 虚拟环境。初始化工具会创建新配置；不会覆盖已有配置。</li>
+<li>历史数据库备份另放受限补充包，不参与默认运行。正式用户数据、线上服务账号和第三方 API 付费权限需要原负责人单独交接。</li>
+<li><code>体验运行/</code> 的 EXE/APK 由本次交接源码重新构建，EXE 已完成全新数据启动和重启验证；随附 PDF 是历史参考，优先阅读本次 <code>离线运行说明.md</code>。源码工作区没有此目录并不代表源码不完整。</li>
+<li><code>work/submission-local/</code> 包含完整离线适配源码；其旧 <code>compact/源文件.zip</code> 原来只是编译产物，不能替代完整源码。本次交接源码已另行完整提供。</li>
+<li>旧演示录屏、截图和过程验收资料已经按要求永久删除，不在本包中。</li>
+</ul>
+<h2 id="收到文件后校验">收到文件后校验</h2>
+<p>比较外部 <code>.sha256</code> 文件与 ZIP 的 SHA-256，再解压：</p>
+<pre><code class="language-powershell">Get-FileHash .\JiqiaoJianghu-Handover-20261011.zip -Algorithm SHA256
+</code></pre>
+<p>在解压根目录检查内部文件：</p>
+<pre><code class="language-powershell">py -3.13 handover/manage.py verify-package
+</code></pre>
+<p>校验应在修改源码之前执行；后续修改源码后再次校验会报告正常的文件变化。具体测试证据、未执行项和打包清单见 <code>handover/verification.json</code>、<code>handover/package-manifest.json</code>、<code>handover/package-exclusions.json</code>。</p>
+</main></div>
+<footer>内容依据本次交接快照。实际验证范围见 handover/verification.json。</footer></body></html>

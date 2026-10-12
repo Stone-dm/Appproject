@@ -1,0 +1,17 @@
+{
+  "errors": 0,
+  "warnings": 219,
+  "informational": 3,
+  "by_issue": {
+    "OldTargetApi": 1,
+    "InvalidColorHexValue": 1,
+    "ModifierParameter": 2,
+    "AutoboxingStateCreation": 3,
+    "UseOfNonLambdaOffsetOverload": 1,
+    "IconLauncherShape": 5,
+    "IconDuplicatesConfig": 6,
+    "IconLocation": 175,
+    "IconDuplicates": 27,
+    "IconMissingDensityFolder": 1
+  }
+}

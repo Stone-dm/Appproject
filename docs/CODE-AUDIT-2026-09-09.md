@@ -1,8 +1,7 @@
 # CODE-AUDIT — 2026-09-09
 
 > 多维度代码扫描结果快照(Android + 后端)。103 个 confirmed finding,按 severity 倒序排列。
-> 下次扫描另起一份 `CODE-AUDIT-YYYY-MM-DD.md`,可 diff 对照趋势。
-> 关联日志:[SESSION-LOG-2026-09-09.md](./SESSION-LOG-2026-09-09.md)("晚间场"段)。
+> 历史快照，仅用于解释仍在源码中的引用；问题状态需重新核验。关联会话日志已从工作树移除，可用 `git show b5d2c8c:docs/SESSION-LOG-2026-09-09.md` 查看原文。
 
 ---
 
@@ -317,7 +316,7 @@
 
 ## 下次会话可立即执行(本审计推荐)
 
-1. **Android Studio Sync → Build → Run** 学习2 页面验证视觉(参考 [SESSION-LOG-2026-09-09.md 晚间场 §3](./SESSION-LOG-2026-09-09.md))
+1. **Android Studio Sync → Build → Run** 学习2 页面验证视觉(当时会话日志可用 `git show b5d2c8c:docs/SESSION-LOG-2026-09-09.md` 查看)
 2. **修 HIGH #1**(SSRF):LuggageApi.kt:303 + 加 allow-list
 3. **修 HIGH #2**(cleartext):build.gradle.kts:14/54
 4. **修 HIGH #5/6**(会话清理):LuggageViewModel.kt:137 + AuthRepository.kt:121

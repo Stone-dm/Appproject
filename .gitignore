@@ -5,6 +5,7 @@
 # Gradle cache & build artifacts
 .gradle/
 **/.gradle/
+**/.kotlin/
 app/build/
 **/build/
 
@@ -21,11 +22,24 @@ app/build/
 **/.coverage
 **/*.db
 services/api/.env
+**/.env
+**/.env.*
+!**/.env.example
+**/local.properties
+**/*.jks
+**/*.keystore
+**/*.p12
+**/*.pfx
+**/*.key
+**/*.pem
+**/*.db-shm
+**/*.db-wal
 
 # Generated local acceptance evidence and scratch output
 artifacts/
 output/
 tmp/
+.playwright-cli/
 
 # Root-level dev cruft (per ENVIRONMENT.md §8.3 — not project files)
 clean_text.py
@@ -33,8 +47,11 @@ write_vertical_text.py
 hs_err_*.log
 replay_*.log
 
-# Personal session notes (per conversation 2026-09-07)
-# SESSION-LOG-*.md in docs/ SHOULD be committed (team history)
-# but if you keep your own private notes elsewhere, ignore them
+# Personal notes; maintain current docs instead of mandatory session logs
 notes/
 *.local.md
+
+# Full handover binaries and machine-dependent runtime data are separate deliveries.
+handover/wheels-win-py313/
+handover/package-manifest.json
+runtime-data/

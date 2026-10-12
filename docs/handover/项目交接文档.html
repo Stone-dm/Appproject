@@ -1,0 +1,364 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>项目交接文档 · 机巧江湖项目交接</title><style>:root{color-scheme:light;--ink:#192e3a;--muted:#526575;--accent:#087c86;--line:#dbe5ea}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#f3f6f8;color:var(--ink);font:16px/1.85 "Microsoft YaHei","PingFang SC",system-ui,sans-serif}
+header{background:#152e3a;color:white;padding:30px max(24px,calc((100vw - 1120px)/2));border-bottom:5px solid #13a8ad}header p{margin:6px 0;color:#c7dce4;font-size:14px}header a{color:#c9fcff}
+.layout{max-width:1240px;margin:auto;display:grid;grid-template-columns:250px minmax(0,1fr);gap:30px;padding:30px 26px}nav{position:sticky;top:20px;max-height:94vh;overflow:auto;align-self:start;font-size:14px}nav a{display:block;padding:7px 0;border-bottom:1px solid var(--line)}main{background:white;min-width:0;padding:34px 46px;border:1px solid var(--line);border-radius:8px}
+h1{font-size:30px;line-height:1.4;margin-top:0}h2{font-size:23px;margin:44px 0 20px;padding-top:18px;border-top:2px solid var(--line);scroll-margin-top:24px}h3{font-size:18px;margin-top:30px;scroll-margin-top:24px}a{color:var(--accent);text-decoration:none;overflow-wrap:anywhere}a:hover{text-decoration:underline}p,li{overflow-wrap:break-word}li{margin-bottom:7px}code{background:#edf3f6;padding:2px 5px;border-radius:4px;font:0.88em/1.6 Consolas,"Microsoft YaHei",monospace;overflow-wrap:anywhere}pre{background:#eef4f7;border-left:3px solid #2997a3;padding:18px;overflow:auto;line-height:1.65}pre code{padding:0;background:none;white-space:pre}blockquote{border-left:4px solid #19a3a8;padding:10px 20px;margin:22px 0;background:#eff9f8}blockquote p{margin:6px 0}.notice{font-size:14px;color:var(--muted)}footer{text-align:center;color:var(--muted);padding:24px;font-size:13px}
+@media(max-width:900px){.layout{display:block;padding:16px}nav{position:static;max-height:none;margin:0 0 20px}main{padding:26px 22px}}@media print{body{background:white;font-size:11pt}.layout{display:block;padding:0}nav,header,footer{display:none}main{border:0;padding:0}pre{white-space:pre-wrap;overflow:visible}pre code{white-space:pre-wrap}h2,h3{break-after:avoid}a{color:inherit}}</style></head>
+<body><header><strong>机巧江湖 · 项目交接</strong><p>2026-10-11 / 完整源码、运行与维护说明</p><a href="00-先读我.html">首次使用</a> · <a href="项目交接文档.html">完整文档</a> · <a href="../../handover/project.json">AI 项目地图</a></header>
+<div class="layout"><nav aria-label="章节目录"><a href="#1-项目目标与交付范围">1. 项目目标与交付范围</a>
+<a href="#2-目录职责和文件权威性">2. 目录职责和文件权威性</a>
+<a href="#3-系统架构与业务数据流">3. 系统架构与业务数据流</a>
+<a href="#4-无需开发环境的体验方式">4. 无需开发环境的体验方式</a>
+<a href="#5-开发环境初始化">5. 开发环境初始化</a>
+<a href="#6-后端启动与数据库">6. 后端启动与数据库</a>
+<a href="#7-android-构建和连接">7. Android 构建和连接</a>
+<a href="#8-ai能力配置与账号">8. AI能力、配置与账号</a>
+<a href="#9-测试与验收">9. 测试与验收</a>
+<a href="#10-离线源码与重新打包">10. 离线源码与重新打包</a>
+<a href="#11-资料备份版本和发布">11. 资料、备份、版本和发布</a>
+<a href="#12-已知问题及维护优先级">12. 已知问题及维护优先级</a>
+<a href="#13-ai接手工作约定">13. AI接手工作约定</a>
+<a href="#14-交接验收清单与故障排查">14. 交接验收清单与故障排查</a></nav><main><p class="notice">此页由同名 Markdown 生成，可离线阅读。源码与附录链接须保持完整交接目录结构。</p><h1 id="机巧江湖完整项目交接文档">机巧江湖完整项目交接文档</h1>
+<blockquote>
+<p><strong>阅读范围：2026-10-11 完整 ZIP 交接快照。</strong> 本文的根目录、目录树与命令按完整交接包解释；仅克隆 Git 仓库时，请先按 <a href="../../handover/README.md">Git 仓库使用说明</a> 初始化。独立离线源码、体验 EXE/APK、依赖 wheel 和设计原件由完整 ZIP 另行交付，不随本仓库克隆。本文记录交接时的未提交状态，Git 当前提交状态请用 <code>git status</code> 核对。</p>
+</blockquote>
+<p>交接日期：2026-10-11<br>
+对象：接手开发者、维护人员、设计人员及 AI 编程助手<br>
+代码来源：当前工作树；Git 基准 <code>b5d2c8c13df325acedeea3e16549f1b0f1449633</code><br>
+主开发工程：<a href="../../README.md">Appproject</a></p>
+<p>这是一份“看懂、运行、验证、继续开发”的交接说明。文中区分代码已经包含的能力、实际验证过的结果和仍需处理的问题。历史设计方案定义目标，不能自动当作所有功能已经完成的证明。</p>
+<h2 id="阅读导航">阅读导航</h2>
+<ol>
+<li><a href="#1-%E9%A1%B9%E7%9B%AE%E7%9B%AE%E6%A0%87%E4%B8%8E%E4%BA%A4%E4%BB%98%E8%8C%83%E5%9B%B4">项目目标与交付范围</a></li>
+<li><a href="#2-%E7%9B%AE%E5%BD%95%E8%81%8C%E8%B4%A3%E5%92%8C%E6%96%87%E4%BB%B6%E6%9D%83%E5%A8%81%E6%80%A7">目录职责和文件权威性</a></li>
+<li><a href="#3-%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E4%B8%8E%E4%B8%9A%E5%8A%A1%E6%95%B0%E6%8D%AE%E6%B5%81">系统架构与业务数据流</a></li>
+<li><a href="#4-%E6%97%A0%E9%9C%80%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E7%9A%84%E4%BD%93%E9%AA%8C%E6%96%B9%E5%BC%8F">无需开发环境的体验方式</a></li>
+<li><a href="#5-%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E5%88%9D%E5%A7%8B%E5%8C%96">开发环境初始化</a></li>
+<li><a href="#6-%E5%90%8E%E7%AB%AF%E5%90%AF%E5%8A%A8%E4%B8%8E%E6%95%B0%E6%8D%AE%E5%BA%93">后端启动与数据库</a></li>
+<li><a href="#7-android-%E6%9E%84%E5%BB%BA%E5%92%8C%E8%BF%9E%E6%8E%A5">Android 构建和连接</a></li>
+<li><a href="#8-ai%E8%83%BD%E5%8A%9B%E9%85%8D%E7%BD%AE%E4%B8%8E%E8%B4%A6%E5%8F%B7">AI能力、配置与账号</a></li>
+<li><a href="#9-%E6%B5%8B%E8%AF%95%E4%B8%8E%E9%AA%8C%E6%94%B6">测试与验收</a></li>
+<li><a href="#10-%E7%A6%BB%E7%BA%BF%E6%BA%90%E7%A0%81%E4%B8%8E%E9%87%8D%E6%96%B0%E6%89%93%E5%8C%85">离线源码与重新打包</a></li>
+<li><a href="#11-%E8%B5%84%E6%96%99%E5%A4%87%E4%BB%BD%E7%89%88%E6%9C%AC%E5%92%8C%E5%8F%91%E5%B8%83">资料、备份、版本和发布</a></li>
+<li><a href="#12-%E5%B7%B2%E7%9F%A5%E9%97%AE%E9%A2%98%E5%8F%8A%E7%BB%B4%E6%8A%A4%E4%BC%98%E5%85%88%E7%BA%A7">已知问题及维护优先级</a></li>
+<li><a href="#13-ai%E6%8E%A5%E6%89%8B%E5%B7%A5%E4%BD%9C%E7%BA%A6%E5%AE%9A">AI接手工作约定</a></li>
+<li><a href="#14-%E4%BA%A4%E6%8E%A5%E9%AA%8C%E6%94%B6%E6%B8%85%E5%8D%95%E4%B8%8E%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5">交接验收清单与故障排查</a></li>
+</ol>
+<h2 id="1-项目目标与交付范围">1. 项目目标与交付范围</h2>
+<h3 id="11-产品定位">1.1 产品定位</h3>
+<p>“机巧江湖”是以江湖主题呈现的学习与创作 Android 应用。主要业务包括账户与设置、课程/秘籍阅读、试炼和学习证据、创作对话及版本管理、媒体生成/上传、作品审核与分发、大会互动和个人行囊。</p>
+<p>内容目录有十卷五十页的结构，但“存在 50 条目录内容”不等于每页都已经完成同等程度的画面、互动和验收。课程成熟度要结合实际页面和内容台账核对。</p>
+<h3 id="12-本次实际交付">1.2 本次实际交付</h3>
+<ul>
+<li>完整 Android 主线源码、资源、Gradle Wrapper 和构建配置。</li>
+<li>完整 FastAPI 业务代码、26 个迁移、正式测试、API 契约/fixtures、种子资源及维护脚本。</li>
+<li>TypeScript 学习接口类型和客户端；它们是接口交付材料，不是另一套网页应用。</li>
+<li>完整离线适配源码及必要设计输入，并附一份现成离线 EXE/APK 便于先体验。</li>
+<li>策划、设计源图、人物素材和图标资料；保留已有内容，不改写成“运行时必需”。</li>
+<li>本文、首次使用入口、AI 可读项目地图、精确 Python 依赖快照、Windows/Python 3.13 安装包和辅助命令。</li>
+<li>打包清单、逐文件哈希、排除理由及本次实际验证结果。</li>
+</ul>
+<h3 id="13-不包含的内容">1.3 不包含的内容</h3>
+<p>本机密钥与配置、签名私钥、Git 对象历史、<code>.venv</code>、构建中间产物、IDE 状态和临时数据不进入通用交接包。旧录屏/截图/历史验收输出此前已永久删除，无法从交接包恢复。</p>
+<p>历史数据库备份另行装入受限补充包；默认运行采用全新数据库。在线模型额度、短信服务、域名/证书、生产服务器权限和正式发布签名不随源码自动获得。包内默认开发账号/密钥模板不能用于生产。</p>
+<h2 id="2-目录职责和文件权威性">2. 目录职责和文件权威性</h2>
+<p>解压后路径可改变，主工程与 <code>work/submission-local/</code> 的相对位置应保持。<code>handover/manage.py</code> 按自身位置定位根目录，不依赖原来的 <code>D:/shuqi/</code>。</p>
+<pre><code class="language-text">项目根目录/
+  00-先读我.md                 首次使用入口
+  项目交接文档.md              完整交接说明
+  README.md                   工作区原有目录索引
+  handover/                   初始化工具、项目地图、依赖、交付清单与验证记录
+  Appproject/                 唯一的日常开发主工程
+    android/                  Kotlin / Compose 客户端
+    services/api/             FastAPI、数据库迁移、测试和工具
+    packages/learning-contracts/  TypeScript 接口交付材料
+    infra/                    Docker Compose、启动和设备验收
+    scripts/                  应用资源生成工具
+    docs/                     技术文档和验收指南
+  work/submission-local/      独立离线适配源码与历史打包工具
+  体验运行/                    本次重建的 Windows EXE、APK、使用说明和历史 PDF
+  文档/                       策划和参赛设计稿
+  设计稿/                     页面参考及品牌源素材
+  人设图/                     人物与场景源素材
+  icon/                       图标、独立设计参考
+</code></pre>
+<h3 id="21-如何判断哪个说明可信">2.1 如何判断哪个说明可信</h3>
+<ol>
+<li>具体实现和有效配置决定当前行为；依赖版本看 <code>libs.versions.toml</code> 与 <code>pyproject.toml</code>。</li>
+<li>本文及 <code>handover/verification.json</code> 说明本次交接方式、测试条件和限制。</li>
+<li>领域接入文档用于理解接口语义，修改前与代码核对。</li>
+<li>旧审计、旧 PDF/Word 策划书只作为背景；“通过”“已完成”“当前版本”等历史措辞不能替代本次证据。</li>
+</ol>
+<p>入口：<a href="../../docs/README.md">文档索引</a>、<a href="../../ENVIRONMENT.md">环境说明</a>、<a href="../../CONTRIBUTING.md">协作约定</a>、<a href="../../services/api/README.md">API 说明</a>。</p>
+<p>交接源码快照不附 <code>.git</code>。文档中的历史 <code>git show</code> 命令需要原仓库历史；在此快照上不可直接运行。可在接手后新建仓库，首次提交应包含本次完整工作树，而不是依据基准提交重新拉取后覆盖清理结果。</p>
+<h2 id="3-系统架构与业务数据流">3. 系统架构与业务数据流</h2>
+<h3 id="31-整体组织">3.1 整体组织</h3>
+<p>客户端是原生 Android 单 <code>:app</code> 模块；后端是按业务域组织的模块化单体，API 与 Worker 可作为不同进程运行，但共用业务代码和数据库。</p>
+<pre><code class="language-text">Android Compose 页面
+  -&gt; ViewModel（页面状态、操作编排）
+  -&gt; Repository / API（登录态、业务读取、HTTP 请求）
+  -&gt; FastAPI 路由（请求验证、身份与权限）
+  -&gt; 领域服务（业务规则、事务、版本和状态变更）
+  -&gt; PostgreSQL（业务状态、后台任务事件）
+
+Outbox Worker -&gt; 读取数据库事件 -&gt; 媒体、生成、导出、审核、删除等任务
+Redis        -&gt; 验证码、限流与缓存
+MinIO        -&gt; 上传隔离区、私有媒体和对象存储
+ClamAV       -&gt; 文件扫描
+</code></pre>
+<p>代码证据：<a href="../../android/app/src/main/java/com/jueqiao/jianghu/JianghuApp.kt">JianghuApp.kt</a>、<a href="../../services/api/app/main.py">API 入口</a>、<a href="../../services/api/app/domains/media/worker.py">Worker</a>、<a href="../../infra/docker-compose.yml">Compose 配置</a>。不要误以为后台任务使用的是一套独立微服务或 Redis 消息队列；当前 Worker 从数据库的 <code>OutboxEvent</code> 领取任务。</p>
+<h3 id="32-android-结构">3.2 Android 结构</h3>
+<p>当前有 151 个生产 Kotlin 文件和 82 个页面目录。主要目录在 <code>android/app/src/main/java/com/jueqiao/jianghu/</code>：</p>
+<ul>
+<li><code>JianghuApp.kt</code>：创建认证、设置和行囊仓库，手动依赖组装。</li>
+<li><code>MainActivity.kt</code>、<code>nav/</code>：应用入口、路由常量和导航接线。</li>
+<li><code>auth/</code>：认证 API、Repository、Token 存储。</li>
+<li><code>creation/</code>、<code>conference/</code>、<code>distribution/</code>、<code>luggage/</code>：相关状态、数据模型和业务操作。</li>
+<li><code>ui/screens/</code>：页面；部分按拼音、课程卷次/编号命名，编号不是可以直接删掉的旧版本号。</li>
+<li><code>ui/components/</code>、<code>ui/theme/</code>：现有组件、布局和主题。</li>
+<li><code>res/</code>：应用实际使用的图片、字体、字符串、Manifest 配套网络配置等。</li>
+</ul>
+<p>创作与大会目前也使用 <code>LuggageRepository</code>，因此目录名称并不等于严格封闭的业务边界。不要只移动文件夹而不调整调用关系。</p>
+<h3 id="33-后端结构">3.3 后端结构</h3>
+<p><code>services/api/app/</code> 当前有 98 个 Python 文件：</p>
+<ul>
+<li><code>main.py</code> 创建应用和共享依赖、注册路由。</li>
+<li><code>api/routes/</code> 暴露 HTTP 路由；<code>core/</code> 放配置、安全、错误和中间件。</li>
+<li><code>domains/</code> 有 11 个领域：<code>catalog</code>、<code>learning</code>、<code>creations</code>、<code>conference</code>、<code>distribution</code>、<code>luggage</code>、<code>mistakes</code>、<code>media</code>、<code>moderation</code>、<code>privacy</code>、<code>profiles</code>。</li>
+<li>各领域通常通过 <code>contracts.py</code>、<code>service.py</code>、<code>models.py</code> 等划分请求契约、业务规则和存储模型，具体按现有代码组织。</li>
+<li><code>services/</code> 等公共层保留认证、用户设置等逻辑；不是所有模块都已统一迁入 <code>domains/</code>。</li>
+<li><code>db.py</code> 管理 SQLAlchemy 会话与缓存失效；<code>migrations/versions/</code> 保存完整 Alembic 升级链。</li>
+</ul>
+<h3 id="34-主要业务链路">3.4 主要业务链路</h3>
+<ul>
+<li>学习：目录/秘籍详情 → 阅读事件 → 试炼 → 解释/迁移证据 → 进度与行囊聚合。</li>
+<li>创作：创意/对话 → 工法 → 草图与版本 → 制作/工具调用 → 测试问题及修订 → 封卷 → 提交。</li>
+<li>媒体：申请上传 → 隔离存储 → 完成上传 → Worker 扫描/处理 → 可授权访问的媒体。</li>
+<li>发布：作品提交 → 审核 → 发布/分发；审核、申诉和撤回有独立状态。</li>
+<li>大会：作品流、评语、采纳/改进、授权和切磋；具体门禁由服务端执行。</li>
+</ul>
+<p>接口细节优先看 <a href="../../services/api/README.md">API README</a> 链出的领域文档，以及 <a href="../../services/api/docs/api/openapi.json">OpenAPI 快照</a>。快照可由 <code>scripts/export_openapi.py</code> 重新导出，修改接口后应同时核对测试与契约。</p>
+<h2 id="4-无需开发环境的体验方式">4. 无需开发环境的体验方式</h2>
+<h3 id="41-适用人群和条件">4.1 适用人群和条件</h3>
+<p>适合产品、设计和先接触项目的人员。需要 Windows x64 电脑、Android 7.0 或以上手机/模拟器。手机跨设备连接需要局域网；不需要在线模型密钥。</p>
+<p><code>体验运行/</code> 包含本次从离线源码重新构建的 EXE、APK 和当前运行说明；安装说明/设计 PDF 从历史运行包保留作参考，操作优先按 <code>离线运行说明.md</code>。新 EXE 已通过全新数据启动、业务请求及重启持久化检查。具体构建、测试范围与产物哈希见 <code>handover/verification.json</code> 和 <code>handover/verification/offline-build-manifest.json</code>，本次没有进行手机/模拟器 UI 验收。</p>
+<h3 id="42-操作步骤">4.2 操作步骤</h3>
+<ol>
+<li>完整解压，双击 <code>体验运行/启动本地演示.exe</code>。</li>
+<li>默认端口 8011，窗口显示启动成功后保持运行。端口冲突时换端口，并同步更改 APP 地址。</li>
+<li>安装同目录 APK，打开“本地演示连接”页。</li>
+<li>Android Studio 模拟器使用 <code>http://10.0.2.2:8011</code>；实体手机用电脑在同一 Wi-Fi 下的局域网地址。</li>
+<li>使用虚拟账号 <code>13900000001</code> 或 <code>13900000002</code>，密码 <code>JqjhReview2026!</code>。不使用短信注册。</li>
+<li>查看学习内容、体验创作与作品保存。班级投递、人工审核等需要额外的教师/班级/审核数据，新库未必立即具备。</li>
+</ol>
+<h3 id="43-数据与功能边界">4.3 数据与功能边界</h3>
+<p>EXE 首次启动生成自己的随机本地密钥和 SQLite 数据库；数据保存在 EXE 附近的 <code>本地数据/</code>，退出后保留。移动运行目录时一并移动该数据目录。源码启动则使用 <code>runtime-data/offline/</code> 或显式指定的位置。</p>
+<p>离线教练会标明规则演示，图片是程序示例，大会判断使用本地模拟提供器；媒体处理不是生产病毒扫描。它不能用来证明在线 AI 画质、生产审核或多用户部署已验收。</p>
+<h2 id="5-开发环境初始化">5. 开发环境初始化</h2>
+<h3 id="51-本次复现基线">5.1 本次复现基线</h3>
+<ul>
+<li>Windows x64、Python 3.13。</li>
+<li>JDK/JBR 21 用于运行 Gradle；Java/Kotlin 字节码目标是 17。</li>
+<li>Gradle 8.10.2、Android Gradle Plugin 8.7.3、Kotlin 2.0.21、Compose BOM 2024.12.01。</li>
+<li>Android SDK Platform 35；<code>minSdk=24</code>、<code>targetSdk=35</code>。</li>
+<li>Docker Desktop 和 Compose 用于完整服务栈，不是运行独立离线 EXE 的前置条件。</li>
+</ul>
+<p>这些是仓库当前配置与交接复现选择，不是对未来最新版本的推荐。不要在首次接手时同时升级工具链和业务代码。</p>
+<h3 id="52-一次性初始化">5.2 一次性初始化</h3>
+<p>在交接根目录运行：</p>
+<pre><code class="language-powershell">py -3.13 handover/manage.py doctor
+py -3.13 handover/manage.py setup
+</code></pre>
+<p>工具会创建主工程 <code>services/api/.venv</code>，优先从包内 <code>handover/wheels-win-py313/</code> 安装固定依赖，再以 editable 方式安装当前 API 源码。它会生成独立随机后端密钥，并尝试识别 Android SDK。</p>
+<p>SDK 不在标准位置时：</p>
+<pre><code class="language-powershell">py -3.13 handover/manage.py configure --sdk &quot;D:/Android/Sdk&quot;
+</code></pre>
+<p>已有 <code>.env</code> 或 <code>local.properties</code> 不会被覆盖。需要改变服务地址或恢复自己的配置时手工编辑对应文件，禁止把他人的密钥直接复制到公共仓库。</p>
+<p>离线依赖包面向 Windows x64 / CPython 3.13；其他平台或 Python 小版本不能假定兼容。若使用网络源安装，可显式增加 <code>setup --online</code>，但须重新验证。项目声明允许的 Python 范围见 <code>pyproject.toml</code>，本次依赖快照只承诺对应复现目标。</p>
+<h3 id="53-本机配置位置">5.3 本机配置位置</h3>
+<ul>
+<li><code>Appproject/services/api/.env</code>：服务端配置、加密密钥和外部服务凭据。</li>
+<li><code>Appproject/android/local.properties</code>：Android SDK 和主线 API 地址。</li>
+<li><code>work/submission-local/android/local.properties</code>：离线 Android 工程的 SDK；离线连接页可在运行时填写服务器地址。</li>
+<li><code>.env.example</code>、<code>local.properties.example</code>：模板，允许交付；不要将实际配置回写进模板。</li>
+</ul>
+<p>配置初始化默认禁用在线对话和生图；不会自动申请第三方账号或产生模型费用。</p>
+<h2 id="6-后端启动与数据库">6. 后端启动与数据库</h2>
+<h3 id="61-先用离线源码验证开发环境">6.1 先用离线源码验证开发环境</h3>
+<p>不需要 Docker，在根目录运行：</p>
+<pre><code class="language-powershell">py -3.13 handover/manage.py run-offline --port 8011
+</code></pre>
+<p>保持终端开启，访问 <code>http://127.0.0.1:8011/healthz</code> 与 <code>/offline-info</code> 检查状态。该路径执行离线适配源码，使用自身 <code>backend/app/</code> 副本；与主线 PostgreSQL 完整环境分开。</p>
+<h3 id="62-完整-compose-服务栈">6.2 完整 Compose 服务栈</h3>
+<p>在完成配置初始化后进入 <code>Appproject/</code>：</p>
+<pre><code class="language-powershell">docker compose -f infra/docker-compose.yml config --quiet
+docker compose -f infra/docker-compose.yml up -d --build
+docker compose -f infra/docker-compose.yml ps
+docker compose -f infra/docker-compose.yml logs --tail 100 api worker
+</code></pre>
+<p>API 容器启动命令会先执行 <code>alembic upgrade head</code>、种子导入，再启动 Uvicorn。ClamAV 首次就绪和镜像下载可能需要较长时间，不能只凭启动命令返回就认定所有服务已健康。</p>
+<p>常用宿主机端口：API 8010、PostgreSQL 55432、Redis 16379、MinIO 19000/19001。服务间使用容器名称与内部端口。不要同时启动另一个占用 8010 的本地 Uvicorn。</p>
+<p><code>infra/docker-compose.override.yml</code> 配置了历史镜像镜像站；只有默认 Docker 镜像不可访问且确认该镜像站可用时再加这个文件，不把它当作必须依赖。</p>
+<p>停止并保留数据：</p>
+<pre><code class="language-powershell">docker compose -f infra/docker-compose.yml down
+</code></pre>
+<p>不要随意添加 <code>-v</code>；它会删除 Compose 数据卷。已有环境先确认项目名、端口和卷，再运行迁移或重建操作。</p>
+<h3 id="63-本地-python-apiworker">6.3 本地 Python API/Worker</h3>
+<p>需要在 IDE 调试时，可以只运行 PostgreSQL、Redis、MinIO、ClamAV，然后在 <code>services/api/</code> 启动 API：</p>
+<pre><code class="language-powershell">.\.venv\Scripts\alembic.exe upgrade head
+.\.venv\Scripts\python.exe -m app.domains.catalog.seed
+.\.venv\Scripts\uvicorn.exe app.main:app --reload --port 8010
+</code></pre>
+<p>另开终端启动后台任务：</p>
+<pre><code class="language-powershell">.\.venv\Scripts\python.exe -m app.domains.media.worker
+</code></pre>
+<p>注意默认 Compose 没有向宿主机映射 ClamAV 3310，所以本地 Python 的真实扫描需要额外配置可达的 ClamAV，或使用完整容器服务。不要把开发扫描器冒充生产扫描。</p>
+<h3 id="64-数据库迁移与内容">6.4 数据库迁移与内容</h3>
+<p>迁移链当前有 26 个文件，末端为 <code>0026_video_media</code>。早期迁移仍是新库升级所需，不能当旧文件删除。运行环境的真实迁移状态用 <code>alembic current</code> / <code>alembic heads</code> 检查。</p>
+<p>新模型变更需新增迁移、检查新库与已有数据升级、测试回归，不直接改旧迁移伪造状态。离线适配使用 <code>Base.metadata.create_all</code> 创建自己的测试数据库，不代表已经验证 PostgreSQL 迁移。</p>
+<p>恢复历史备份应在独立数据库先检查，再决定如何升级；不要默认恢复进正在开发或生产运行的库。受限备份不附原来的加密密钥，部分加密字段可能无法解密，应与原负责人单独核对。</p>
+<h2 id="7-android-构建和连接">7. Android 构建和连接</h2>
+<h3 id="71-主线-debug">7.1 主线 Debug</h3>
+<p>Android Studio 打开 <code>Appproject/android/</code>。终端构建可在根目录运行：</p>
+<pre><code class="language-powershell">py -3.13 handover/manage.py build-android --variant debug --java-home &quot;C:/Program Files/Android/Android Studio/jbr&quot;
+</code></pre>
+<p>该命令执行 Debug 构建、单元测试和 Lint。依赖已经下载时可加 <code>--offline</code>；首次接手没有 Gradle/Maven 缓存时不能使用离线模式。</p>
+<p>输出是 <code>Appproject/android/app/build/outputs/apk/debug/app-debug.apk</code>。安装到设备由接手人选择目标，不自动覆盖他人的设备数据。</p>
+<h3 id="72-四种主线构建与独立离线构建">7.2 四种主线构建与独立离线构建</h3>
+<ul>
+<li><code>debug</code>：日常开发，读取本机 <code>AUTH_BASE_URL</code>。</li>
+<li><code>release</code>：启用 R8 和资源压缩；正式签名及正式 HTTPS 服务仍需配置和验收。</li>
+<li><code>demo</code>、<code>acceptance</code>：独立包名后缀，连接 8011 的演示/验收服务，使用 Debug 签名。</li>
+<li><code>offline</code>：位于独立 <code>work/submission-local/android/</code> 工程，专用连接页、离线包名及网络配置；同样不是正式签名生产发行版。</li>
+</ul>
+<h3 id="73-地址设置">7.3 地址设置</h3>
+<p>模拟器连接电脑主线 API：<code>AUTH_BASE_URL=http://10.0.2.2:8010/</code>。实体 USB 设备可配置 <code>http://127.0.0.1:8010/</code> 并执行：</p>
+<pre><code class="language-powershell">adb devices
+adb -s &lt;实际设备编号&gt; reverse tcp:8010 tcp:8010
+</code></pre>
+<p>多设备时必须指定真实编号；拔插、重启或端口变化后重新核对。Compose 默认 MinIO 对外地址偏向模拟器访问；USB 或局域网设备还要同步调整媒体对外地址/端口映射，不能只改登录 API。</p>
+<h2 id="8-ai能力配置与账号">8. AI能力、配置与账号</h2>
+<h3 id="81-在线提供器">8.1 在线提供器</h3>
+<p>配置模板列出图片生成、创作教练、大会评审和短信参数。代码中的模型名称是当前配置示例，不承诺该型号在接手人的账户上可用；应通过提供方授权及实际调用验证后启用。</p>
+<ul>
+<li>创作教练：服务端 provider、model、timeout 和相应 API key/base URL。</li>
+<li>图片生成：服务端 provider/model、额度、重试和超时配置。</li>
+<li>大会评审：可使用 development、webhook 或 disabled，线上需要明确审核角色与结果来源。</li>
+<li>短信：开发 <code>noop</code> 与固定验证码只用于开发；生产配置校验会限制开发设置。</li>
+</ul>
+<p>Android 不应直接持有模型供应商密钥。供应商账号权限、费用、模型可用性和数据处理约定需独立交接。本包不含任何真实供应商密钥。</p>
+<h3 id="82-账号区别">8.2 账号区别</h3>
+<p>离线 EXE 的两个固定账号只是本地虚拟演示账户。主线新库没有这些账号的自动承诺，应按认证接口或当前页面注册专用测试用户。教师、班级和审核角色需要对应数据和权限，不能直接修改数据库绕过门禁来证明验收通过。</p>
+<p>内部 Worker/审核令牌与普通用户 Token 不同。不要在日志、截图、提交或文档中记录真实 Token。</p>
+<h2 id="9-测试与验收">9. 测试与验收</h2>
+<h3 id="91-正式测试入口">9.1 正式测试入口</h3>
+<p>根目录：</p>
+<pre><code class="language-powershell">py -3.13 handover/manage.py test
+</code></pre>
+<p>该入口在临时工作目录中执行主工程的正式测试，显式指定 <code>pyproject.toml</code> 和测试目录，并清除继承的 <code>JIANGHU_*</code> 环境变量。原因是 <code>app.main</code> 导入时会创建默认应用；直接在带有 <code>.env</code> 的 API 目录执行 pytest，可能提前连接 MinIO 等开发服务。临时目录隔离不修改测试或业务代码，也不读取真实用户数据。当前 22 个测试文件、130 个用例覆盖认证、领域 API、契约、媒体、缓存和 Worker 等，测试使用各自的替代服务与数据库。</p>
+<p>Android 有 10 个正式测试文件，最近清理时核对为 50 个测试方法；通过 <code>testDebugUnitTest</code> 执行。测试数量是当前快照统计，不是未来永远不变的验收常量。</p>
+<h3 id="92-验证证据的使用规则">9.2 验证证据的使用规则</h3>
+<p>2026-10-11 本次交接的实测结果：</p>
+<ul>
+<li>全新虚拟环境从包内 64 个 wheel 离线安装成功，<code>pip check</code> 通过；配置再次初始化时，3 个已有本机配置文件保持不变。</li>
+<li>后端 130 个测试通过；主线 Android Debug 构建成功，50 个单元测试在禁用构建缓存、强制重跑后通过。</li>
+<li>Android Lint 为 0 个错误、219 个警告、3 个信息项。警告清单保留在 <code>handover/verification/android-lint.txt</code>，没有因“能够构建”而被视为已解决。</li>
+<li>离线 Android APK 和 Windows EXE 从交接目录重新构建成功，离线 50 个单元测试通过。</li>
+<li>离线源码和新 EXE 都用全新数据检查了业务 HTTP 流程，并确认同一数据目录重启后对话仍保存、6 个媒体文件仍可下载。</li>
+<li>Compose 配置解析通过，迁移链头确认为 <code>0026_video_media</code>。本次没有拉起完整 Compose 栈、执行 PostgreSQL 升级或恢复历史备份。</li>
+</ul>
+<p>这些验证在同一台 Windows 电脑的独立目录完成，Python 虚拟环境是新建的，Android SDK/JDK 和 Gradle 缓存是已有的。手机/模拟器 UI、在线模型/短信、正式签名和生产部署未在本次验证。</p>
+<p>本次交接执行了哪些命令、在哪个目录、是否新环境、结果如何，以 <code>handover/verification.json</code> 为准。2026-10-11 之前或同日早期清理报告中的测试记录不能冒充本次交接测试。</p>
+<p>语法检查、Mock 测试、源码服务测试、打包 EXE 测试、设备 UI 测试是不同层级，不能互相替代。ZIP CRC/哈希只证明包完整，不能证明所有业务需求完成。</p>
+<h3 id="93-创作设备验收">9.3 创作设备验收</h3>
+<p>按 <a href="../../docs/creation-demo-acceptance.md">创作验收指南</a> 执行 <code>infra/run-demo-acceptance.ps1</code>。该脚本会安装包、清空对应应用数据并创建验收业务数据；需要明确选择专用设备。普通开发交接不自动运行破坏设备数据的步骤。</p>
+<h3 id="94-离线运行与重启">9.4 离线运行与重启</h3>
+<p>在 <code>work/submission-local/</code> 使用主工程 Python：</p>
+<pre><code class="language-powershell">..\..\Appproject\services\api\.venv\Scripts\python.exe verify_runtime.py http://127.0.0.1:8011
+</code></pre>
+<p>首次验证成功后，停止并用同一数据目录重启离线后端，再执行：</p>
+<pre><code class="language-powershell">..\..\Appproject\services\api\.venv\Scripts\python.exe verify_restart.py http://127.0.0.1:8011
+</code></pre>
+<p>两个命令都支持实际端口和 <code>--output</code>；重启验证支持 <code>--runtime-result</code>。默认输出进入 <code>artifacts/verification/</code>。运行验证会创建测试作品；不要在真实用户数据上随意运行。</p>
+<h2 id="10-离线源码与重新打包">10. 离线源码与重新打包</h2>
+<h3 id="101-为什么保留独立工程">10.1 为什么保留独立工程</h3>
+<p>离线 Android 有 <code>OfflineSetupActivity.kt</code>、连接配置、Manifest 和压缩资源差异；后端有 <code>offline_server.py</code>，提供持久化 SQLite、内置演示账号、规则教练和本地媒体处理。业务模块目前是主线副本，必须保留以支撑现有打包。</p>
+<p>修改主线不会自动同步到离线版。发布前按改动范围明确同步，比较差异并测试两端，不要直接整目录覆盖独有入口。</p>
+<h3 id="102-新的可移植打包入口">10.2 新的可移植打包入口</h3>
+<p>交接新增 <code>handover/build_offline.py</code>，使用当前离线 Android 源码和相对路径 PyInstaller spec 构建 APK 与 EXE，产物写入新的输出目录，拒绝覆盖已存在的输出。依赖由 <code>manage.py setup</code> 安装。</p>
+<pre><code class="language-powershell">py -3.13 handover/build_offline.py --java-home &quot;C:/Program Files/Android/Android Studio/jbr&quot; --output &quot;D:/Releases/JiqiaoOffline-New&quot;
+</code></pre>
+<p>若 Gradle 依赖已缓存可添加 <code>--offline-gradle</code>。首次重建需 Android SDK/JDK 和构建依赖；现成 EXE/APK 的启动则不需要这些。</p>
+<p>本次在独立交接目录执行了此重建入口，生成 Offline APK 与 PyInstaller EXE，并对新 EXE 执行了业务和重启验证。新运行包保留离线账号和模拟说明，不会自动变成在线模型或生产发行包。构建使用当前机器已安装的 SDK/JDK 与 Gradle 缓存；不代表无工具链、无网络的新电脑可以直接编译。</p>
+<h3 id="103-旧工具的保留与限制">10.3 旧工具的保留与限制</h3>
+<p><code>patch_android.py</code> 是当时把主线副本改成离线版的一次性转换脚本，当前源码已经应用过修改，不能重复运行。</p>
+<p><code>assemble_packages.py</code>、<code>zip_deliverables.py</code>、<code>compact/assemble_compact.py</code>、<code>compact/optimize_resources.py</code> 等记录了旧参赛编译产物和资源压缩流程；有旧绝对路径、前次 APK 输入和“只交编译产物”的规则。本次源码交接不依赖这些旧入口，不能按旧保密提交规则删除本次完整源码。</p>
+<p><code>make_documents.py</code> 使用 <code>plan-export.pdf</code> 和 Windows 中文字体；它是旧参赛 PDF 生成方式。现成 PDF 已附，若重做需先检查文案与当前功能是否一致。</p>
+<h2 id="11-资料备份版本和发布">11. 资料、备份、版本和发布</h2>
+<h3 id="111-设计资料">11.1 设计资料</h3>
+<p><code>文档/</code> 保存策划书和设计方案；<code>设计稿/</code>、<code>人设图/</code>、<code>icon/</code> 保存源资料与独立设计参考。应用使用的成品资源在 Android <code>res/</code>，两者不按“是否有代码引用”混为一谈。</p>
+<p><code>CONTRIBUTING.md</code> 中的 <code>D:/图/</code> 属于历史素材来源；接手人不需要该磁盘路径，以本包素材目录为准。保留其中仍适用的页面命名、坐标注释、返回栈和用户界面约定。</p>
+<p>字体、图片、图标、第三方组件和模型服务的使用授权需在正式公开发布前由负责人确认。本次文件交接不作新的权利保证。</p>
+<h3 id="112-git-与交接快照">11.2 Git 与交接快照</h3>
+<p>当前源码含此前清理和本次交接修改，尚未自动提交。<code>handover/provenance.json</code> 记录基准提交和快照口径；包中的完整工作树为本次交接内容。</p>
+<p>未附旧 <code>.git</code> 是为了避免把机器路径、已删除的大媒体历史和潜在历史配置一起塞入通用包。如果团队需要持续原分支，应由原负责人通过受控仓库提供历史和访问权限；不要用一个旧提交取代本包修改。</p>
+<h3 id="113-数据库和签名">11.3 数据库和签名</h3>
+<p>历史迁移前备份仅作为 <code>JiqiaoJianghu-Restricted-Backup-20261011.zip</code> 受限补充交付，默认不导入。该 ZIP 没有加密，“受限”表示只交给获授权的接手人；不要放到公开源码仓库。业务数据、密码重置、加密密钥轮换和恢复过程需要单独演练。Android Debug/离线包使用开发签名；正式签名密钥不在本包，正式发布前必须单独处理。</p>
+<h3 id="114-再次交付">11.4 再次交付</h3>
+<p>先运行对应测试与构建，把新产物放新目录；明确源码版本、依赖、配置和已知限制，再生成哈希和校验清单。不要将 <code>.env</code>、运行数据库、测试账号真实凭据或供应商密钥随手放进 ZIP。</p>
+<h2 id="12-已知问题及维护优先级">12. 已知问题及维护优先级</h2>
+<ol>
+<li><strong>客户端业务接口集中。</strong> 创作和大会状态依赖 <code>LuggageRepository</code>，<code>LuggageApi.kt</code> 有约 1,280 行并覆盖多个领域。优先按正在修改的业务整理职责。</li>
+<li><strong>状态与导航文件偏大。</strong> <code>CreationViewModel.kt</code> 约 1,770 行、<code>JianghuNavHost.kt</code> 约 1,433 行。改动应局部化并通过回归，不在接手第一天同时改架构、界面和依赖版本。</li>
+<li><strong>离线副本存在同步成本。</strong> 当前先保留和验证；长期可在明确差异后统一构建来源。</li>
+<li><strong>旧参赛工具不可直接跨机器运行。</strong> 本次提供新入口，旧路径只作历史参考。</li>
+<li><strong>功能完成度需要实测。</strong> 50 页目录、可点击页面或接口存在，不等于全部交付门槛完成。优先核验需要演示/发布的具体路线。</li>
+<li><strong>正式部署仍需独立验收。</strong> HTTPS、生产短信/模型/审核、签名 Release、备份恢复、容量和多用户权限不因本地测试通过而自动成立。</li>
+<li><strong>历史审计是快照。</strong> 保留报告有过时行号/路径；不要不读当前代码就照抄“仍未修复”结论。</li>
+</ol>
+<p>已有 UI 协作约定偏好从相近页面复制、保持具体页面差异，不要为了通用化强行抽象所有 Composable。架构调整应有明确需求和可验证收益。</p>
+<h2 id="13-ai接手工作约定">13. AI接手工作约定</h2>
+<p>先读取本节、<code>handover/project.json</code>、主工程 README 和具体模块代码；不要从旧会话日志猜测现状。</p>
+<h3 id="131-ai-的初始任务顺序">13.1 AI 的初始任务顺序</h3>
+<ol>
+<li>确认当前根目录与用户本次目标，区分主线、离线版和设计资料。</li>
+<li>若有 Git，先看状态并保留已有修改；若没有，按交接快照工作，不伪造提交历史。</li>
+<li>读取最近相关代码及配置模板，实际密钥只由拥有者配置，不输出它们。</li>
+<li>确定修改影响范围与对应测试；先做最小可验证变更。</li>
+<li>执行检查后报告实际结果，明确未运行/未验证项。</li>
+<li>更新现有文档，不为每次对话制造大量会话日志、截图或重复验收报告。</li>
+</ol>
+<h3 id="132-不得擅自当垃圾删除的内容">13.2 不得擅自当垃圾删除的内容</h3>
+<p>正式测试、数据库迁移、API fixtures、Gradle Wrapper、应用资源、离线独有入口、本机配置、设计原件和数据库备份。文件名含 <code>test</code>、日期、版本号或页面数字，不构成删除依据。</p>
+<p>不要为了“去重”直接删除离线 <code>backend/app/</code>，也不要把 TypeScript 契约误认为废弃 Web 前端。不读取实际用户需求就重构全部页面、改产品文案或自动发布。</p>
+<h3 id="133-可直接交给下一位-ai-的提示词">13.3 可直接交给下一位 AI 的提示词</h3>
+<blockquote>
+<p>你正在接手机巧江湖项目。先读根目录《项目交接文档.md》、handover/project.json、Appproject/README.md 和 Appproject/CONTRIBUTING.md，再检查实际代码。日常主线在 Appproject，离线适配在 work/submission-local，两者不要混改。保护已有修改与本机配置，不输出密钥；把历史说明当背景而非当前事实。围绕我指定的功能做最小变更，运行适当测试并报告实际结果与未验证项。未经任务授权，不提交、推送、发布、清空数据或安装到我的设备。</p>
+</blockquote>
+<h2 id="14-交接验收清单与故障排查">14. 交接验收清单与故障排查</h2>
+<h3 id="141-接手当天">14.1 接手当天</h3>
+<ul class="contains-task-list">
+<li class="task-list-item"><input disabled="disabled" type="checkbox" /> 校验外部 ZIP SHA-256；解压后运行 <code>verify-package</code>。</li>
+<li class="task-list-item"><input disabled="disabled" type="checkbox" /> 阅读功能和离线模拟边界。</li>
+<li class="task-list-item"><input disabled="disabled" type="checkbox" /> 启动离线 EXE，连接 Android APP，登录并保存一次测试作品，再重启确认记录。</li>
+<li class="task-list-item"><input disabled="disabled" type="checkbox" /> 初始化 Python 开发环境并运行后端测试。</li>
+<li class="task-list-item"><input disabled="disabled" type="checkbox" /> 配置 SDK/JDK，构建主线 Debug；如继续维护离线版，也构建 Offline。</li>
+<li class="task-list-item"><input disabled="disabled" type="checkbox" /> 确认在线模型/短信/生产权限由谁移交，不能用离线结果代替在线验收。</li>
+<li class="task-list-item"><input disabled="disabled" type="checkbox" /> 确认源码托管位置、发布签名、备份责任人与后续优先事项。</li>
+</ul>
+<h3 id="142-常见故障">14.2 常见故障</h3>
+<ul>
+<li><strong>Python 依赖安装失败</strong>：检查是否 Windows x64 / Python 3.13，是否完整解压 wheelhouse；不要复制旧 <code>.venv</code>。其他平台需重新解析依赖并测试。</li>
+<li><strong>Gradle 启动失败</strong>：确认终端 <code>JAVA_HOME</code> 与 Android Studio Gradle JDK 指向 JDK/JBR 21，SDK Platform 35 已安装。</li>
+<li><strong>第一次离线构建失败</strong>：<code>--offline</code> 只用于已有缓存；联网下载依赖后再试。</li>
+<li><strong>登录或媒体连接失败</strong>：核对服务健康、API 地址、端口、ADB reverse、MinIO 外部地址及设备所在网络。</li>
+<li><strong>离线 APP 拒绝连接</strong>：应连接提供 <code>/offline-info</code> 的离线服务，不是主线 8010 API；检查构建标识和端口。</li>
+<li><strong>生成或教练不可用</strong>：检查是不是主线初始化后默认禁用；真实 provider 需要可用模型、密钥和网络，不会自动降级成假 AI。</li>
+<li><strong>重启验证缺少 JSON</strong>：先运行 <code>verify_runtime.py</code>，保留同一数据目录再重启，向 <code>verify_restart.py</code> 传入本次结果。</li>
+<li><strong>端口占用</strong>：先识别占用者，给本项目换端口；不要停止其他项目的数据库或服务。</li>
+<li><strong>旧工具报 D:/shuqi/ 路径不存在</strong>：使用本次可移植入口；旧工具需逐项适配，不能用空目录掩盖缺失输入。</li>
+</ul>
+<p>出现文档和代码矛盾时，记录具体文件、命令与错误，核对当前实现后修正文档。不要只凭“包能打开”就宣布完整项目已验收。</p>
+</main></div>
+<footer>内容依据本次交接快照。实际验证范围见 handover/verification.json。</footer></body></html>

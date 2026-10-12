@@ -1,80 +1,29 @@
-# docs/ 文档索引
+# 开发文档索引
 
-> 本目录是项目文档的索引。每次会话开始,先读 `README.md` 再读 `SESSION-LOG-最新一天.md`,快速了解项目状态。
+日常开发从 [主工程说明](../README.md) 开始；本文集中列出仍有维护用途的文档。历史审计中的问题和测试数字须重新验证，不能直接当作当前状态。
 
----
+## 环境与协作
 
-## 怎么用这个目录
+- [Git 仓库交接入口](../handover/README.md)、[完整交接文档](handover/项目交接文档.md)、[AI 项目地图](../handover/project.json)。
+- [新人入门](ONBOARDING.md)：最短阅读路径和开发边界。
+- [环境要求](../ENVIRONMENT.md)、[本地启动](../DEV-SETUP.md)。
+- [Android 构建](../android/README.md)、[API 启动与测试](../services/api/README.md)。
+- [协作约定](../CONTRIBUTING.md)、[屏幕适配](../android/docs/screen-adaptation.md)。
+- [分支合并流程](MERGE-WORKFLOW.md)：需要合并分支时使用。
 
-| 文件 | 何时读 |
-|---|---|
-| `README.md`(本文件) | 新会话 / 接手项目时 |
-| `SESSION-LOG-YYYY-MM-DD.md` | 想了解某一天做了什么 |
-| `DEV-SETUP.md`(在项目根) | 第一次配置 dev 环境 |
-| `TROUBLESHOOTING.md`(计划中) | 遇到具体问题想查"怎么修" |
-| `DECISIONS.md`(计划中) | 想了解架构决策的原因 |
+## 业务实现与验收
 
----
+- [创作流程接入](../services/api/docs/creation-workflow-integration.md)。
+- [创作对话精简方案](creation-conversation-simplification-20260910.md)。
+- [创作档案分类](creation-archive-categories-20260912.md)、[成长规则](creation-growth-rules-20260912.md)。
+- [大会页面方案](conference-page-plan-and-implementation-prompt-20260911.md)。
+- [创作流程验收指南](creation-demo-acceptance.md)：运行工具、前置条件和证据位置。
+- [后端交付检查清单](backend-delivery-checklist.md)：待验证门槛，不预填通过状态。
+- 其他领域接口说明从 [API 文档入口](../services/api/README.md) 查找。
 
-## 当前文件清单
+## 整理记录与历史参考
 
-| 文件 | 用途 | 创建日期 |
-|---|---|---|
-| [README.md](./README.md) | 本索引 | - |
-| [ONBOARDING.md](./ONBOARDING.md) | 新人入门指南 — 环境/规范/陷阱/必读 | 2026-09-10 |
-| [SESSION-LOG-2026-09-07.md](./SESSION-LOG-2026-09-07.md) | 2026-09-07 dev 环境调试会话 | 2026-09-07 |
-| [SESSION-LOG-2026-09-08.md](./SESSION-LOG-2026-09-08.md) | 2026-09-08 滚轮1-12 + 试炼1-3 + 未完待续/后山页 | 2026-09-08 |
-| [SESSION-LOG-2026-09-09.md](./SESSION-LOG-2026-09-09.md) | 2026-09-09 环境清理 + 登录连不上根因 + 多维度扫描 + 学习2 页面 | 2026-09-09 |
-| [SESSION-LOG-2026-09-10.md](./SESSION-LOG-2026-09-10.md) | 2026-09-10 学习/滚轮 6 新屏 + 修 dead button + v2 审计 | 2026-09-10 |
-| [CODE-AUDIT-2026-09-09.md](./CODE-AUDIT-2026-09-09.md) | v1 代码审计 — 103 个 finding + 8 个优先行动 | 2026-09-09 |
-| [CODE-AUDIT-2026-09-10.md](./CODE-AUDIT-2026-09-10.md) | v2 代码审计 — 68 个 finding(含 NEW/PERSISTED 标注) | 2026-09-10 |
-| [CODE-AUDIT-2026-09-11.md](./CODE-AUDIT-2026-09-11.md) | v3 代码审计 — Vol-2 doc 批(0 runtime bug,9 HIGH pre-existing)| 2026-09-11 |
-| [SUMMARY-2026-09-09-to-2026-09-10.md](./SUMMARY-2026-09-09-to-2026-09-10.md) | 跨两天高层 TL;DR + 8 优先行动 | 2026-09-10 |
+- [2026-10-11 项目整理记录](PROJECT-CLEANUP-2026-10-11.md)：历次删除范围及核验结果。
+- [9 月 9 日审计](CODE-AUDIT-2026-09-09.md)、[9 月 10 日审计](CODE-AUDIT-2026-09-10.md)、[9 月 11 日审计](CODE-AUDIT-2026-09-11.md)：仍有源码注释或审计交叉引用，因此保留原路径，仅作为历史背景。
 
-**项目根目录的文档**(不属于 docs/ 但常参考):
-- [DEV-SETUP.md](../DEV-SETUP.md) — dev 环境完整配置流程
-- [CONTRIBUTING.md](../CONTRIBUTING.md) — 协作约定
-- [android/docs/screen-adaptation.md](../android/docs/screen-adaptation.md) — 屏幕适配方案(两段式/三段式 + 真机 dp 表)
-
----
-
-## 新会话流程(建议)
-
-1. AI agent 在新会话开始时,先读这个 README
-2. 读最近一份 `SESSION-LOG-YYYY-MM-DD.md`(最新日期)
-3. 看 `git status` 和 `git log --oneline -10` 了解当前状态
-4. 问用户今天想做什么
-
----
-
-## 添加新文档的约定
-
-| 文档类型 | 命名 | 何时建 |
-|---|---|---|
-| 新人入门指南 | `ONBOARDING.md` | 项目首建,新人加入时 |
-| 会话记录 | `SESSION-LOG-YYYY-MM-DD.md` | 每次长跑调试结束(≥30 分钟) |
-| 决策记录 | `DECISIONS.md` | 做了重要的架构 / 设计决策 |
-| 故障排查 | `TROUBLESHOOTING.md` | 解决了一个反复出现的问题,值得记录 |
-| 代码审计 | `CODE-AUDIT-YYYY-MM-DD.md` | 多维度代码扫描结果快照(下次扫描另起一份,可用 diff 看趋势) |
-| Sprint 计划 | `SPRINT-YYYY-MM-DD.md` | 启动一个多步骤功能开发 |
-| 分支合并 SOP | `MERGE-WORKFLOW.md` | 合并任何分支前必读(侦察 → 评估 → 建议 → 合并)|
-
-每类文档第一行写明:
-```markdown
-# 标题
-
-> 一句话说明本文档是什么,什么时候创建,为什么需要它。
-```
-
----
-
-## 文档 git 政策
-
-**应该 commit 到 git 的**:
-- `SESSION-LOG-*.md`(团队历史)
-- `DECISIONS.md`(架构决策)
-- `TROUBLESHOOTING.md`(解决方案)
-
-**不应该 commit**(`docs/.gitignore` 或项目根 `.gitignore`):
-- 个人笔记(不是知识沉淀)
-- 临时排查记录(没结论的)
+旧会话日志、重复跨日摘要和证据已失效的 9 月 9 日验收报告已移出当前工作树；原文可从 Git 提交 `b5d2c8c13df325acedeea3e16549f1b0f1449633` 查看。不要求每次会话新增日志或重复审计文档。优先维护已有说明，临时输出写入 `artifacts/` 或 `tmp/`。

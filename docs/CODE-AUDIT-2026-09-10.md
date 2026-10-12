@@ -2,7 +2,7 @@
 
 > v2 多维度代码扫描结果。68 个 confirmed finding,3 个 critical / 14 个 high / 27 个 medium / 24 个 low。
 > 与昨日 [CODE-AUDIT-2026-09-09.md](./CODE-AUDIT-2026-09-09.md) 对照阅读。
-> 关联日志:[SESSION-LOG-2026-09-10.md](./SESSION-LOG-2026-09-10.md)。跨两天高层摘要:[SUMMARY-2026-09-09-to-2026-09-10.md](./SUMMARY-2026-09-09-to-2026-09-10.md)。
+> 历史快照，仅用于解释仍在源码中的引用；问题状态需重新核验。关联会话和跨日摘要已从工作树移除，原文位于 Git 提交 `b5d2c8c` 的 `docs/` 中。
 
 ---
 
