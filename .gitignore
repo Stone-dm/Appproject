@@ -38,9 +38,14 @@ replay_*.log
 #   留作本次验证证据(可在 commit 后用 git log 取回),但**不入库**(纯 dump 噪声)。
 ui_*.xml
 
-# Personal session notes (per conversation 2026-09-07)
-# SESSION-LOG-*.md in docs/ SHOULD be committed (team history)
-# but if you keep your own private notes elsewhere, ignore them
+# SESSION-LOG-*.md in docs/ are personal daily logs — NOT committed (per 2026-10-12 request)
+#   留作本地个人记录;远程只看到 CODE-AUDIT / DESIGN-SOURCES / MERGE-WORKFLOW 等公共文档
+#   历史日志已通过 git rm --cached 解除跟踪,文件本身保留在本地
+#   取回:git log --oneline -- docs/SESSION-LOG-2026-09-29.md  →  git show <commit>:docs/SESSION-LOG-2026-09-29.md
+docs/SESSION-LOG-*.md
+docs/_archive/SESSION-LOG-*.md
+
+# Other personal/private notes (per conversation 2026-09-07)
 notes/
 *.local.md
 
