@@ -929,7 +929,7 @@ actions = Houshan1Actions(
                     onBack = { navController.popBackStack() },
                     onOpenHoushan10 = { navController.navigate(Routes.Shilian10) },
                     onOpenHoushan11 = { navController.navigate(Routes.Shilian11) },
-                    onOpenVolume8Part1 = {},
+                    onOpenVolume8Part1 = { navController.navigate(Routes.Volume8Part1) },   // 2026-10-13 §1:赏罚驭灵诀(本页 Y 最大)→ 卷8-1(恢复 §15)
                     onOpenVolume9Part1 = {},
                     onOpenVolume10Part1 = {},
                 ),
